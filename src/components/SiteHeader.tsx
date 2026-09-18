@@ -4,9 +4,8 @@ import markAsset from "@/assets/mark.png.asset.json";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
+  { to: "/about", label: "About Us" },
   { to: "/services", label: "Services" },
-  { to: "/journal", label: "Journal" },
 ] as const;
 
 export function SiteHeader() {
