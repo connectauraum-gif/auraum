@@ -444,12 +444,6 @@ function BookPage() {
                         }}
                       />
                     ))}
-                    <Field
-                      def={{ name: "preferredDate", label: "Preferred Date", type: "text" }}
-                      dateInput
-                      value={values["preferredDate"] ?? ""}
-                      onChange={(val) => setValues((prev) => ({ ...prev, preferredDate: val }))}
-                    />
                   </div>
 
                   <button type="submit" disabled={sending} className="btn-ritual w-full sm:w-auto">
@@ -473,13 +467,11 @@ function Field({
   value,
   onChange,
   error,
-  dateInput,
 }: {
   def: FieldDef;
   value: string;
   onChange: (v: string) => void;
   error?: string | undefined;
-  dateInput?: boolean;
 }) {
   const border = error ? "border-destructive" : "border-input";
   const isArea = def.type === "textarea";
@@ -508,7 +500,7 @@ function Field({
         <input
           id={def.name}
           name={def.name}
-          type={dateInput ? "date" : (def.type ?? "text")}
+          type={def.type ?? "text"}
           value={value}
           placeholder={def.placeholder ?? ""}
           autoComplete={def.autoComplete ?? "off"}
