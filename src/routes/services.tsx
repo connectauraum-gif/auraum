@@ -290,7 +290,7 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
 
           <Link
             to="/book"
-            search={{ service: service.name }}
+            search={{ service: service.key }}
             className="btn-ritual mt-8 w-full sm:w-auto"
           >
             Experience Auraum
