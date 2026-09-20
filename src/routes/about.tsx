@@ -140,7 +140,7 @@ function AboutPage() {
             <p className="text-[0.6rem] uppercase tracking-brand opacity-70">About Isa</p>
             <h2 className="font-display mt-4 max-w-3xl text-3xl leading-[1.15] sm:text-5xl md:text-6xl">
               Isa Barao
-              <span className="block text-xl tracking-brand uppercase opacity-70 sm:text-sm">
+              <span className="mt-4 block text-[0.6rem] uppercase tracking-brand opacity-70">
                 Founder of Auraum
               </span>
             </h2>
