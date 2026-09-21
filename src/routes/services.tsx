@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import gong from "@/assets/gong.jpg";
-import ripples from "@/assets/ripples.jpg";
+import aura from "@/assets/aura.jpg";
 import ritual from "@/assets/ritual.jpg";
 import shadows from "@/assets/shadows.jpg";
+import soundbath from "@/assets/soundbath.jpg";
+import chakra from "@/assets/chakra.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/services")({
