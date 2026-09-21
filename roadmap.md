@@ -9,4 +9,5 @@
       with complete descriptions + all "Suitable for" points, EXPERIENCE AURAUM CTA each
 - [x] Booking page: 5 space types (Restore, Receive, Perform, Reopenings, Places of Exchange),
       each with its own field set, validation, confirmation message
-- [ ] Responsive pass desktop/tablet/mobile
+- [x] Premium imagery pass (sound bowls, meditation, mandala, aura) + WhatsApp button
+- [x] Responsive pass desktop/tablet/mobile
