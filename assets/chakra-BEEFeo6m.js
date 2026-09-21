@@ -1,1 +1,0 @@
-var e=`/auraum/assets/chakra-BQS7VhYr.jpg`;export{e as t};

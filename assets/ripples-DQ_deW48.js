@@ -1,0 +1,1 @@
+var e=`/assets/ripples-C55OnhGw.jpg`;export{e as t};

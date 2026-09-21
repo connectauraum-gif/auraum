@@ -1,1 +1,0 @@
-var e=`/auraum/assets/ritual-36kvQIKO.jpg`;export{e as t};
