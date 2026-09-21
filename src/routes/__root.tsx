@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { Preloader } from "../components/Preloader";
+import { WhatsAppButton } from "../components/WhatsAppButton";
 
 function NotFoundComponent() {
   return (
@@ -125,6 +126,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <SiteFooter />
+      <WhatsAppButton />
     </QueryClientProvider>
   );
 }

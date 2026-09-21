@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import gong from "@/assets/gong.jpg";
-import ripples from "@/assets/ripples.jpg";
+import aura from "@/assets/aura.jpg";
 import ritual from "@/assets/ritual.jpg";
 import shadows from "@/assets/shadows.jpg";
+import soundbath from "@/assets/soundbath.jpg";
+import chakra from "@/assets/chakra.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/services")({
@@ -76,8 +78,8 @@ const services: Service[] = [
       "When a space no longer feels quite as it once did",
       "New intentions",
     ],
-    img: ripples,
-    alt: "Golden water ripples",
+    img: aura,
+    alt: "Soft golden light waves drifting through mist",
   },
   {
     key: "perform",
@@ -97,8 +99,8 @@ const services: Service[] = [
       "When a workspace feels stagnant or unsettled",
       "When a space no longer feels quite as it once did",
     ],
-    img: gong,
-    alt: "Bronze gong with a felt mallet",
+    img: chakra,
+    alt: "Golden concentric mandala of light",
   },
   {
     key: "places-of-exchange",
@@ -119,10 +121,10 @@ function ServicesPage() {
     <>
       <section className="grain relative flex min-h-[60vh] items-end overflow-hidden">
         <img
-          src={gong}
-          alt="Bronze gong and felt mallet"
-          width={1024}
-          height={1024}
+          src={soundbath}
+          alt="Crystal singing bowls glowing in candlelight"
+          width={1280}
+          height={960}
           className="animate-drift absolute inset-0 h-full w-full object-cover opacity-70"
         />
         <div className="veil absolute inset-0" />
