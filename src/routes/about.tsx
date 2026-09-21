@@ -109,8 +109,8 @@ function AboutPage() {
 
           <Reveal delay={160} className="overflow-hidden">
             <img
-              src={ripples}
-              alt="Golden water ripples"
+              src={chakra}
+              alt="Golden concentric mandala of light"
               loading="lazy"
               width={1024}
               height={1024}
