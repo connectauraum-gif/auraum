@@ -194,6 +194,15 @@ function ShadowBand() {
         height={768}
         className="animate-drift absolute inset-0 h-full w-full object-cover"
       />
+      <img
+        src={chakra}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        width={1024}
+        height={1024}
+        className="animate-spin-slow pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 object-contain opacity-25 mix-blend-screen md:h-[40rem] md:w-[40rem]"
+      />
       <div className="absolute inset-0 flex items-center justify-center">
         <Reveal>
           <p className="font-display px-6 text-center text-2xl italic text-ink/80 sm:text-4xl">
