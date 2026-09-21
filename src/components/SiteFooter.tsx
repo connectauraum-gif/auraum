@@ -56,8 +56,8 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a href="tel:+000000000" className="link-underline hover:text-gold">
-                  +00 000 000 000
+                <a href="tel:+919958882810" className="link-underline hover:text-gold">
+                  +91 99588 82810
                 </a>
               </li>
               <li className="text-muted-foreground">By appointment only</li>
