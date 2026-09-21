@@ -1,1 +1,0 @@
-var e=`/nova-interface/assets/chakra-BQS7VhYr.jpg`;export{e as t};

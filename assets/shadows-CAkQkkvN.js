@@ -1,0 +1,1 @@
+var e=`/auraum/assets/shadows-BKDBYFdg.jpg`;export{e as t};

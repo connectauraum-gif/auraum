@@ -1,0 +1,1 @@
+var e=`/auraum/assets/soundbath-CZiC54U7.jpg`;export{e as t};

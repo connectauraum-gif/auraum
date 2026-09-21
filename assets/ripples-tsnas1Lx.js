@@ -1,0 +1,1 @@
+var e=`/auraum/assets/ripples-C55OnhGw.jpg`;export{e as t};

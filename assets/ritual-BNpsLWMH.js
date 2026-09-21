@@ -1,1 +1,0 @@
-var e=`/nova-interface/assets/ritual-36kvQIKO.jpg`;export{e as t};

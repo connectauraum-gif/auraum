@@ -1,1 +1,0 @@
-var e=`/nova-interface/assets/shadows-BKDBYFdg.jpg`;export{e as t};

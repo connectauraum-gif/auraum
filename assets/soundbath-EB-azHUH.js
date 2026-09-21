@@ -1,1 +1,0 @@
-var e=`/nova-interface/assets/soundbath-CZiC54U7.jpg`;export{e as t};

@@ -1,1 +1,0 @@
-var e=`/nova-interface/assets/ripples-C55OnhGw.jpg`;export{e as t};
