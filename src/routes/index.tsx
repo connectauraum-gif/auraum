@@ -6,7 +6,6 @@ import soundbath from "@/assets/soundbath.jpg";
 import meditation from "@/assets/meditation.jpg";
 import chakra from "@/assets/chakra.jpg";
 import shadows from "@/assets/shadows.jpg";
-import ritual from "@/assets/ritual.jpg";
 import vortex from "@/assets/vortex.jpg";
 import { Reveal, useInView } from "@/components/Reveal";
 
