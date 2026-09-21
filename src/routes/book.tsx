@@ -40,7 +40,7 @@ const PHONE: FieldDef = {
   label: "Telephone / WhatsApp",
   type: "tel",
   required: true,
-  placeholder: "+00 000 000 000",
+  placeholder: "+91 99588 82810",
   autoComplete: "tel",
 };
 const CITY: FieldDef = {
