@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import ritual from "@/assets/ritual.jpg";
 import shadows from "@/assets/shadows.jpg";
-import ripples from "@/assets/ripples.jpg";
+import chakra from "@/assets/chakra.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/about")({
