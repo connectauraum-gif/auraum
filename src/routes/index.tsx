@@ -170,11 +170,11 @@ function Manifesto() {
 
       <div className="relative h-56 overflow-hidden md:h-[34rem]">
         <img
-          src={gong}
-          alt="Bronze gong with a felt mallet"
+          src={soundbath}
+          alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
-          width={1024}
-          height={1024}
+          width={1280}
+          height={960}
           className={`h-full w-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
             visible ? "scale-100" : "scale-125"
           }`}
@@ -219,11 +219,11 @@ function QuoteBand() {
 
         <Reveal delay={150} className="overflow-hidden">
           <img
-            src={ritual}
-            alt="Incense bowl and olive plant on a stone ledge"
+            src={meditation}
+            alt="Woman meditating in a warm stone room at dusk"
             loading="lazy"
             width={1024}
-            height={768}
+            height={1280}
             className="h-72 w-full object-cover transition-transform duration-[1400ms] hover:scale-105 md:h-[26rem]"
           />
         </Reveal>
