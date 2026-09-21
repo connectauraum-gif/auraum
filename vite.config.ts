@@ -2,15 +2,19 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   vite: {
-    base: "/nova-interface/",
+    base: "/auraum/",
   },
 
   tanstackStart: {
     server: {
       entry: "server",
     },
-    spa: {
+
+    prerender: {
       enabled: true,
+      crawlLinks: true,
+      autoStaticPathsDiscovery: true,
+      autoSubfolderIndex: true,
     },
   },
 });
