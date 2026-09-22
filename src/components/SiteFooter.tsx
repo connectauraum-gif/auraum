@@ -10,8 +10,8 @@ export function SiteFooter() {
           <div>
             <div className="flex items-center gap-3">
               <img
-                src={markAsset.url}
-                alt=""
+                src="./favicon.png"
+                alt="AURAUM"
                 loading="lazy"
                 width={28}
                 height={28}
