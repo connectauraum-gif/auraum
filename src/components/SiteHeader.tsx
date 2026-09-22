@@ -43,8 +43,8 @@ export function SiteHeader() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-10">
           <Link to="/" className="flex min-w-0 items-center gap-3">
             <img
-              src={markAsset.url}
-              alt=""
+              src="/favicon.png"
+              alt="AURAUM"
               width={28}
               height={28}
               className="h-7 w-7 shrink-0 animate-spin-slow"
