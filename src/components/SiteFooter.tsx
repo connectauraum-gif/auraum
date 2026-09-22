@@ -51,8 +51,8 @@ export function SiteFooter() {
             </p>
             <ul className="mt-5 space-y-3 text-sm text-foreground/75">
               <li>
-                <a href="mailto:hello@auraum.studio" className="link-underline hover:text-gold">
-                  hello@auraum.studio
+                <a href="mailto:hello@auraum.in" className="link-underline hover:text-gold">
+                  hello@auraum.in
                 </a>
               </li>
               <li>
