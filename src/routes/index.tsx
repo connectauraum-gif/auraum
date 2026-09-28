@@ -16,12 +16,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Spatial cleaning through sound. Auraum clears, balances and harmonises homes and studios.",
+          "Space clearing through sound. Auraum clears, balances and harmonises homes and studios.",
       },
       { property: "og:title", content: "AURAUM — Every space holds something" },
       {
         property: "og:description",
-        content: "Spatial cleaning through sound. Clear. Balance. Harmonise. Restore. Belong.",
+        content: "Space clearing through sound. Clear. Balance. Harmonise. Restore. Belong.",
       },
     ],
   }),
@@ -56,7 +56,10 @@ function ScrollProgress() {
   }, []);
   return (
     <div className="fixed inset-x-0 top-0 z-[60] h-px bg-transparent">
-      <div className="h-full bg-gold/80 transition-[width] duration-150" style={{ width: `${p}%` }} />
+      <div
+        className="h-full bg-gold/80 transition-[width] duration-150"
+        style={{ width: `${p}%` }}
+      />
     </div>
   );
 }
@@ -98,7 +101,7 @@ function Hero() {
           <div className="mt-8 flex items-center gap-4">
             <span className="h-px w-12 bg-gold" />
             <p className="text-[0.6rem] uppercase leading-relaxed tracking-brand text-foreground/80">
-              Spatial cleaning
+              Space clearing
               <br />
               through sound
             </p>
@@ -156,14 +159,12 @@ function Manifesto() {
         </Reveal>
         <Reveal delay={150}>
           <p className="mx-auto max-w-xs text-xs leading-loose opacity-80">
-            We work with the unseen. Through sound, intention and presence, we clear what no
-            longer belongs and return spaces to their natural harmony.
+            We work with the unseen. Through sound, intention and presence, we clear what no longer
+            belongs and return spaces to their natural harmony.
           </p>
         </Reveal>
         <Reveal delay={300}>
-          <p className="text-[0.6rem] uppercase tracking-brand">
-            Spaces hold more than we see
-          </p>
+          <p className="text-[0.6rem] uppercase tracking-brand">Spaces hold more than we see</p>
         </Reveal>
       </div>
 
@@ -239,9 +240,8 @@ function QuoteBand() {
         <Reveal delay={300}>
           <p className="text-[0.55rem] uppercase tracking-brand opacity-70">Meet Isa</p>
           <p className="mt-4 max-w-xs text-xs leading-loose opacity-80">
-            Founder and spatial sound practitioner. Isa works at the intersection of sound,
-            space and architecture, creating environments that feel different — because they
-            are.
+            Founder and spatial sound practitioner. Isa works at the intersection of sound, space
+            and architecture, creating environments that feel different — because they are.
           </p>
           <Link
             to="/about"

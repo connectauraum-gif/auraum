@@ -2,237 +2,84 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { Reveal } from "@/components/Reveal";
 
-type FieldDef = {
-  name: string;
-  label: string;
-  type?: "text" | "email" | "tel" | "textarea";
-  required?: boolean;
-  placeholder?: string;
-  autoComplete?: string;
-  full?: boolean;
-};
-
-type Category = {
+type ServiceOption = {
   key: string;
   name: string;
   sub: string;
-  intro?: string[];
-  fields: FieldDef[];
+  isOperatingBusiness?: boolean;
 };
 
-const NAME: FieldDef = {
-  name: "name",
-  label: "Name",
-  required: true,
-  placeholder: "Your full name",
-  autoComplete: "name",
-};
-const EMAIL: FieldDef = {
-  name: "email",
-  label: "Email",
-  type: "email",
-  required: true,
-  placeholder: "you@email.com",
-  autoComplete: "email",
-};
-const PHONE: FieldDef = {
-  name: "phone",
-  label: "Telephone / WhatsApp",
-  type: "tel",
-  required: true,
-  placeholder: "+91 99588 82810",
-  autoComplete: "tel",
-};
-const CITY: FieldDef = {
-  name: "city",
-  label: "City & Country",
-  required: true,
-  placeholder: "City, Country",
-};
-const SIZE: FieldDef = { name: "size", label: "Size of the Space", placeholder: "Approximate m² / sq ft" };
-const FLOORS: FieldDef = { name: "floors", label: "Number of Floors", placeholder: "e.g. 2" };
-const PERIOD: FieldDef = {
-  name: "period",
-  label: "Preferred Date or Period",
-  placeholder: "e.g. Late October, or a specific date",
-};
-const ANYTHING: FieldDef = {
-  name: "anythingElse",
-  label: "Anything Else You Would Like Isa to Know?",
-  type: "textarea",
-  full: true,
-};
-
-const CATEGORIES: Category[] = [
+const SERVICES: ServiceOption[] = [
   {
-    key: "restore",
-    name: "RESTORE",
-    sub: "For private homes, apartments and residences.",
-    fields: [
-      NAME,
-      EMAIL,
-      PHONE,
-      CITY,
-      { name: "homeType", label: "Type of Home", placeholder: "Apartment, villa, townhouse…" },
-      SIZE,
-      FLOORS,
-      { name: "people", label: "Number of People Living There", placeholder: "e.g. 4" },
-      { name: "brought", label: "What has brought you to AURAUM?", type: "textarea", full: true },
-      {
-        name: "history",
-        label:
-          "Is there anything significant about the home or its recent history that you feel is relevant?",
-        type: "textarea",
-        full: true,
-      },
-      PERIOD,
-      ANYTHING,
-    ],
+    key: "home",
+    name: "Home Sound Session",
+    sub: "For houses, apartments and private residences.",
   },
   {
-    key: "receive",
-    name: "RECEIVE",
-    sub: "For hotels, restaurants, clubs and spaces created to receive others.",
-    fields: [
-      NAME,
-      { name: "company", label: "Company / Property", placeholder: "Name of the property" },
-      { name: "role", label: "Role", placeholder: "Your role" },
-      EMAIL,
-      PHONE,
-      CITY,
-      { name: "propertyType", label: "Type of Property", placeholder: "Hotel, restaurant, club…" },
-      SIZE,
-      FLOORS,
-      {
-        name: "operating",
-        label: "Is the Property Currently Operating?",
-        placeholder: "Yes / No / Opening soon",
-      },
-      {
-        name: "support",
-        label: "What would you like the session to support?",
-        type: "textarea",
-        full: true,
-      },
-      {
-        name: "occasion",
-        label: "Is this connected to an opening, reopening or particular occasion?",
-        type: "textarea",
-        full: true,
-      },
-      PERIOD,
-      {
-        name: "hours",
-        label: "Would the session take place before, during or outside operating hours?",
-        full: true,
-      },
-      ANYTHING,
-    ],
+    key: "hospitality",
+    name: "Hospitality Sound Session",
+    sub: "For hotels, restaurants, clubs and guest spaces.",
+    isOperatingBusiness: true,
   },
   {
-    key: "perform",
-    name: "PERFORM",
-    sub: "For offices, studios, practices and other places where people create and work together.",
-    intro: [
-      "Tell us about your environment, your team, and what you would like to shift or invite into the space.",
-    ],
-    fields: [
-      NAME,
-      { name: "company", label: "Company", placeholder: "Company name" },
-      { name: "role", label: "Role", placeholder: "Your role" },
-      EMAIL,
-      PHONE,
-      CITY,
-      { name: "workspaceType", label: "Type of Workspace", placeholder: "Office, studio, practice…" },
-      SIZE,
-      FLOORS,
-      {
-        name: "people",
-        label: "Approximate Number of People Using the Space",
-        placeholder: "e.g. 20",
-      },
-      { name: "brought", label: "What has brought you to AURAUM?", type: "textarea", full: true },
-      PERIOD,
-      ANYTHING,
-    ],
+    key: "workplace",
+    name: "Workplace Sound Session",
+    sub: "For offices, studios, practices and shared workspaces.",
+    isOperatingBusiness: true,
   },
   {
-    key: "reopenings",
-    name: "REOPENINGS",
-    sub: "For moments that do not belong inside a box.",
-    intro: [
-      "A new home. A marriage. A new business. A private gathering. A retreat. A significant transition. Or simply a moment that deserves to be marked with intention.",
-      "Tell us what you are creating, changing or stepping into.",
-    ],
-    fields: [
-      NAME,
-      EMAIL,
-      PHONE,
-      CITY,
-      {
-        name: "occasion",
-        label: "What is the occasion or intention?",
-        type: "textarea",
-        full: true,
-      },
-      SIZE,
-      FLOORS,
-      {
-        name: "people",
-        label: "Approximate Number of People Using the Space",
-        placeholder: "e.g. 30",
-      },
-      { name: "brought", label: "What has brought you to AURAUM?", type: "textarea", full: true },
-      PERIOD,
-      ANYTHING,
-    ],
+    key: "retail",
+    name: "Retail & Gallery Sound Session",
+    sub: "For boutiques, bookshops, galleries, showrooms and commercial spaces.",
+    isOperatingBusiness: true,
   },
   {
-    key: "places-of-exchange",
-    name: "PLACES OF EXCHANGE",
-    sub: "For spaces that hold people, energy and purpose.",
-    intro: [
-      "A bookshop. A boutique. A showroom. A retail environment. Or any other commercial space that would benefit from greater balance, clarity and presence.",
-      "Tell us about the space, how it is used, and what you would like to shift, restore or create within it.",
-    ],
-    fields: [
-      NAME,
-      EMAIL,
-      PHONE,
-      { name: "company", label: "Company / Organisation", placeholder: "Name of the business" },
-      CITY,
-      {
-        name: "commercialType",
-        label: "Type of Commercial Space",
-        placeholder: "Boutique, gallery, showroom…",
-      },
-      SIZE,
-      FLOORS,
-      {
-        name: "people",
-        label: "Approximate Number of People Using the Space",
-        placeholder: "e.g. 15",
-      },
-      {
-        name: "address",
-        label: "What Would You Like to Address or Create Within the Space?",
-        type: "textarea",
-        full: true,
-      },
-      { name: "brought", label: "What Has Brought You to AURAUM?", type: "textarea", full: true },
-      PERIOD,
-      ANYTHING,
-    ],
+    key: "occasion",
+    name: "Occasion & Transition Session",
+    sub: "For meaningful moments, gatherings and new beginnings.",
   },
 ];
 
 const ALIASES: Record<string, string> = {
-  restore: "restore",
-  receive: "receive",
-  perform: "perform",
-  reopenings: "reopenings",
-  "places of exchange": "places-of-exchange",
-  "places-of-exchange": "places-of-exchange",
+  home: "home",
+  "home-sound-clearing": "home",
+  "home sound clearing": "home",
+  "home-sound-session": "home",
+  "home sound session": "home",
+  restore: "home",
+
+  hospitality: "hospitality",
+  "hospitality-sound-clearing": "hospitality",
+  "hospitality sound clearing": "hospitality",
+  "hospitality-sound-session": "hospitality",
+  "hospitality sound session": "hospitality",
+  receive: "hospitality",
+
+  workplace: "workplace",
+  "workplace-sound-clearing": "workplace",
+  "workplace sound clearing": "workplace",
+  "workplace-sound-session": "workplace",
+  "workplace sound session": "workplace",
+  perform: "workplace",
+
+  retail: "retail",
+  "retail-sound-clearing": "retail",
+  "retail sound clearing": "retail",
+  "retail-gallery": "retail",
+  "retail & gallery": "retail",
+  "retail-and-gallery": "retail",
+  "retail & gallery sound session": "retail",
+  "retail & gallery session": "retail",
+  "places-of-exchange": "retail",
+  "places of exchange": "retail",
+
+  occasion: "occasion",
+  "occasion-transition": "occasion",
+  "occasion & transition": "occasion",
+  "occasion-and-transition": "occasion",
+  "occasion & transition sound session": "occasion",
+  "occasion & transition session": "occasion",
+  reopenings: "occasion",
 };
 
 export const Route = createFileRoute("/book")({
@@ -247,12 +94,13 @@ export const Route = createFileRoute("/book")({
       {
         name: "description",
         content:
-          "Tell us a little about the space, the people within it, and what has brought you to AURAUM.",
+          "Tell us a little about your space and what has brought you to AURAUM. Choose the option that best describes your enquiry, then complete the short form.",
       },
       { property: "og:title", content: "Book a Session — AURAUM" },
       {
         property: "og:description",
-        content: "Restore, Receive, Perform, Reopenings or Places of Exchange — request a session.",
+        content:
+          "Home, Hospitality, Workplace, Retail or Occasion & Transition — request a sound session.",
       },
     ],
   }),
@@ -261,23 +109,6 @@ export const Route = createFileRoute("/book")({
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 const phoneRe = /^[+]?[\d\s()-]{7,20}$/;
-
-function validate(cat: Category, v: Record<string, string>): Record<string, string> {
-  const e: Record<string, string> = {};
-  for (const f of cat.fields) {
-    const value = (v[f.name] ?? "").trim();
-    if (f.required && !value) {
-      e[f.name] = `Please enter your ${f.label.toLowerCase()}.`;
-      continue;
-    }
-    if (!value) continue;
-    if (f.type === "email" && !emailRe.test(value)) e[f.name] = "Please enter a valid email address.";
-    if (f.type === "tel" && !phoneRe.test(value)) e[f.name] = "Please enter a valid phone number.";
-    const max = f.type === "textarea" ? 1000 : 200;
-    if (value.length > max) e[f.name] = `Please keep this under ${max} characters.`;
-  }
-  return e;
-}
 
 function BookPage() {
   const search = Route.useSearch();
@@ -288,28 +119,56 @@ function BookPage() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const active = CATEGORIES.find((c) => c.key === activeKey) ?? null;
+  const activeService = SERVICES.find((c) => c.key === activeKey) ?? null;
 
   const choose = (key: string) => {
     setActiveKey(key);
-    setValues({});
     setErrors({});
     setSent(false);
   };
 
+  const handleFieldChange = (name: string, val: string) => {
+    setValues((prev) => ({ ...prev, [name]: val }));
+    if (errors[name]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!active) return;
-    const found = validate(active, values);
-    setErrors(found);
-    if (Object.keys(found).length > 0) {
+    if (!activeKey) {
+      setErrors({ service: "Please choose a service option above." });
+      return;
+    }
+
+    const errs: Record<string, string> = {};
+    if (!values.name?.trim()) errs.name = "Please enter your name.";
+    if (!values.email?.trim()) {
+      errs.email = "Please enter your email address.";
+    } else if (!emailRe.test(values.email.trim())) {
+      errs.email = "Please enter a valid email address.";
+    }
+    if (!values.phone?.trim()) {
+      errs.phone = "Please enter your telephone or WhatsApp number.";
+    } else if (!phoneRe.test(values.phone.trim())) {
+      errs.phone = "Please enter a valid phone number.";
+    }
+    if (!values.city?.trim()) errs.city = "Please enter your city and country.";
+
+    setErrors(errs);
+
+    if (Object.keys(errs).length > 0) {
       const first = document.querySelector<HTMLElement>("[data-invalid='true']");
       first?.scrollIntoView({ behavior: "smooth", block: "center" });
       first?.focus?.();
       return;
     }
+
     setSending(true);
-    // Ready for future email / CRM integration — payload: { category: active.key, ...values }
     setTimeout(() => {
       setSending(false);
       setSent(true);
@@ -330,16 +189,10 @@ function BookPage() {
           </h1>
           <div className="mx-auto mt-7 max-w-xl space-y-4 text-sm leading-loose text-muted-foreground">
             <p>
-              Every place is different, and every session begins with understanding what is already
-              there.
-            </p>
-            <p>
-              Tell us a little about the space, the people within it, and what has brought you to{" "}
-              <span className="text-foreground">AURAUM</span>.
-            </p>
-            <p>
-              From there, Isa will consider the most appropriate approach for your session and
-              contact you personally.
+              Tell us a little about your space and what has brought you to{" "}
+              <span className="text-foreground">AURAUM</span>. Choose the option that best describes
+              your enquiry, then complete the short form. Isa will review it and contact you
+              personally to discuss the session.
             </p>
           </div>
         </Reveal>
@@ -375,23 +228,26 @@ function BookPage() {
         ) : (
           <>
             <Reveal delay={100} className="mt-16">
-              <p className="text-center text-[0.6rem] uppercase tracking-brand text-foreground/80">
-                Choose what best describes your space
+              <p className="text-center text-[0.65rem] uppercase tracking-brand text-foreground/80">
+                Choose a service:
               </p>
+              {errors.service && (
+                <p className="mt-2 text-center text-xs text-destructive">{errors.service}</p>
+              )}
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {CATEGORIES.map((c) => {
-                  const on = c.key === activeKey;
+                {SERVICES.map((s) => {
+                  const on = s.key === activeKey;
                   return (
                     <button
-                      key={c.key}
+                      key={s.key}
                       type="button"
-                      onClick={() => choose(c.key)}
+                      onClick={() => choose(s.key)}
                       aria-pressed={on}
                       className={`group border p-5 text-left transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         on
                           ? "border-gold bg-card/60"
                           : "border-border hover:border-gold/60 hover:bg-card/30"
-                      } ${c.key === "places-of-exchange" ? "sm:col-span-2" : ""}`}
+                      } ${s.key === "occasion" ? "sm:col-span-2" : ""}`}
                     >
                       <span className="flex items-center gap-3">
                         <span
@@ -399,10 +255,10 @@ function BookPage() {
                             on ? "bg-gold shadow-[0_0_14px_var(--gold)]" : "bg-border"
                           }`}
                         />
-                        <span className="font-display text-xl tracking-[0.12em]">{c.name}</span>
+                        <span className="font-display text-xl tracking-[0.08em]">{s.name}</span>
                       </span>
                       <span className="mt-2 block text-xs leading-relaxed text-muted-foreground">
-                        {c.sub}
+                        {s.sub}
                       </span>
                     </button>
                   );
@@ -410,45 +266,170 @@ function BookPage() {
               </div>
             </Reveal>
 
-            {active && (
-              <Reveal key={active.key} delay={80} className="mt-14">
+            {activeService && (
+              <Reveal key={activeService.key} delay={80} className="mt-14">
                 <div className="gold-line w-full" />
-                <h2 className="font-display mt-10 text-3xl tracking-[0.12em] sm:text-4xl">
-                  {active.name}
-                </h2>
-                <p className="mt-3 text-sm italic text-foreground/80">{active.sub}</p>
-                {active.intro?.map((p) => (
-                  <p key={p} className="mt-4 text-sm leading-loose text-muted-foreground">
-                    {p}
-                  </p>
-                ))}
-                <p className="mt-8 text-[0.6rem] uppercase tracking-brand text-muted-foreground">
-                  Please share
-                </p>
+                <div className="mt-10 flex flex-wrap items-baseline justify-between gap-4">
+                  <h2 className="font-display text-3xl tracking-[0.08em] sm:text-4xl">
+                    {activeService.name}
+                  </h2>
+                  <span className="text-[0.6rem] uppercase tracking-brand text-muted-foreground">
+                    {activeService.sub}
+                  </span>
+                </div>
 
-                <form onSubmit={onSubmit} noValidate className="mt-6 space-y-8">
-                  <div className="grid gap-8 sm:grid-cols-2">
-                    {active.fields.map((f) => (
-                      <Field
-                        key={f.name}
-                        def={f}
-                        value={values[f.name] ?? ""}
-                        error={errors[f.name]}
-                        onChange={(val) => {
-                          setValues((prev) => ({ ...prev, [f.name]: val }));
-                          setErrors((prev) => {
-                            const next = { ...prev };
-                            delete next[f.name];
-                            return next;
-                          });
-                        }}
+                <form onSubmit={onSubmit} noValidate className="mt-12 space-y-14">
+                  {/* Section 1: Your details */}
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="font-display text-2xl tracking-[0.06em] text-foreground">
+                        Your details
+                      </h3>
+                      <div className="gold-line mt-2 w-16" />
+                    </div>
+
+                    <div className="grid gap-8 sm:grid-cols-2">
+                      <FormField
+                        name="name"
+                        label="Name"
+                        required
+                        value={values.name ?? ""}
+                        placeholder="Your full name"
+                        autoComplete="name"
+                        error={errors.name}
+                        onChange={(v) => handleFieldChange("name", v)}
                       />
-                    ))}
+
+                      <FormField
+                        name="email"
+                        label="Email"
+                        type="email"
+                        required
+                        value={values.email ?? ""}
+                        placeholder="you@email.com"
+                        autoComplete="email"
+                        error={errors.email}
+                        onChange={(v) => handleFieldChange("email", v)}
+                      />
+
+                      <FormField
+                        name="phone"
+                        label="Telephone / WhatsApp"
+                        type="tel"
+                        required
+                        value={values.phone ?? ""}
+                        placeholder="+91 99588 82810"
+                        autoComplete="tel"
+                        error={errors.phone}
+                        onChange={(v) => handleFieldChange("phone", v)}
+                      />
+
+                      <FormField
+                        name="city"
+                        label="City and country"
+                        required
+                        value={values.city ?? ""}
+                        placeholder="e.g. London, UK / Mumbai, India"
+                        error={errors.city}
+                        onChange={(v) => handleFieldChange("city", v)}
+                      />
+
+                      <FormField
+                        name="period"
+                        label="Preferred date or period"
+                        value={values.period ?? ""}
+                        placeholder="e.g. Late October, or a specific date"
+                        full
+                        onChange={(v) => handleFieldChange("period", v)}
+                      />
+                    </div>
                   </div>
 
-                  <button type="submit" disabled={sending} className="btn-ritual w-full sm:w-auto">
-                    {sending ? "Sending…" : "Book a session"}
-                  </button>
+                  {/* Section 2: Tell us about the session */}
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="font-display text-2xl tracking-[0.06em] text-foreground">
+                        Tell us about the session
+                      </h3>
+                      <div className="gold-line mt-2 w-16" />
+                    </div>
+
+                    <div className="grid gap-8 sm:grid-cols-2">
+                      <FormField
+                        name="spaceOrOccasion"
+                        label="What type of space or occasion is this?"
+                        value={values.spaceOrOccasion ?? ""}
+                        placeholder="e.g. Private apartment, restaurant, creative office, gallery, wedding…"
+                        full
+                        onChange={(v) => handleFieldChange("spaceOrOccasion", v)}
+                      />
+
+                      <FormField
+                        name="intention"
+                        label="What would you like the session to address or mark?"
+                        type="textarea"
+                        value={values.intention ?? ""}
+                        placeholder="Tell us what you would like to shift, restore, clear or celebrate within the space…"
+                        full
+                        onChange={(v) => handleFieldChange("intention", v)}
+                      />
+
+                      <FormField
+                        name="sizeAndFloors"
+                        label="Approximate size of the space and number of floors, if applicable"
+                        value={values.sizeAndFloors ?? ""}
+                        placeholder="e.g. 250 m² / 2 floors"
+                        onChange={(v) => handleFieldChange("sizeAndFloors", v)}
+                      />
+
+                      <FormField
+                        name="people"
+                        label="Approximate number of people who use the space or will attend"
+                        value={values.people ?? ""}
+                        placeholder="e.g. 4 residents, 15 team members, or 50 guests"
+                        onChange={(v) => handleFieldChange("people", v)}
+                      />
+
+                      <FormField
+                        name="recentChange"
+                        label="Is there a recent change, opening or event we should know about?"
+                        type="textarea"
+                        value={values.recentChange ?? ""}
+                        placeholder="e.g. Recent renovation, upcoming opening, team transition, sale preparation…"
+                        full
+                        onChange={(v) => handleFieldChange("recentChange", v)}
+                      />
+
+                      <FormField
+                        name="operatingHours"
+                        label="For hospitality and other operating businesses, please also tell us whether you would prefer the session before, during or outside operating hours."
+                        value={values.operatingHours ?? ""}
+                        placeholder="e.g. Before operating hours, outside operating hours, or flexible"
+                        full
+                        onChange={(v) => handleFieldChange("operatingHours", v)}
+                      />
+
+                      <FormField
+                        name="anythingElse"
+                        label="Is there anything else you would like Isa to know?"
+                        type="textarea"
+                        value={values.anythingElse ?? ""}
+                        placeholder="Any additional details, intentions, or notes for Isa…"
+                        full
+                        onChange={(v) => handleFieldChange("anythingElse", v)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={sending}
+                      className="btn-ritual w-full sm:w-auto"
+                    >
+                      {sending ? "Sending…" : "Book a session"}
+                    </button>
+                  </div>
                 </form>
               </Reveal>
             )}
@@ -462,35 +443,49 @@ function BookPage() {
 const fieldClass =
   "mt-3 w-full border-b bg-transparent pb-3 text-sm outline-none transition-colors duration-500 placeholder:text-muted-foreground/60 focus:border-gold [color-scheme:dark]";
 
-function Field({
-  def,
+function FormField({
+  name,
+  label,
   value,
   onChange,
   error,
+  type = "text",
+  required = false,
+  placeholder = "",
+  autoComplete = "off",
+  full = false,
 }: {
-  def: FieldDef;
+  name: string;
+  label: string;
   value: string;
   onChange: (v: string) => void;
   error?: string | undefined;
+  type?: "text" | "email" | "tel" | "textarea";
+  required?: boolean;
+  placeholder?: string;
+  autoComplete?: string;
+  full?: boolean;
 }) {
   const border = error ? "border-destructive" : "border-input";
-  const isArea = def.type === "textarea";
+  const isArea = type === "textarea";
+
   return (
-    <div className={`min-w-0 ${def.full || isArea ? "sm:col-span-2" : ""}`}>
+    <div className={`min-w-0 ${full ? "sm:col-span-2" : ""}`}>
       <label
-        htmlFor={def.name}
+        htmlFor={name}
         className="text-[0.6rem] uppercase tracking-brand text-muted-foreground"
       >
-        {def.label}
-        {def.required ? " *" : ""}
+        {label}
+        {required ? " *" : ""}
       </label>
       {isArea ? (
         <textarea
-          id={def.name}
-          name={def.name}
+          id={name}
+          name={name}
           rows={3}
           maxLength={1000}
           value={value}
+          placeholder={placeholder}
           aria-invalid={!!error}
           data-invalid={!!error}
           onChange={(e) => onChange(e.target.value)}
@@ -498,12 +493,12 @@ function Field({
         />
       ) : (
         <input
-          id={def.name}
-          name={def.name}
-          type={def.type ?? "text"}
+          id={name}
+          name={name}
+          type={type}
           value={value}
-          placeholder={def.placeholder ?? ""}
-          autoComplete={def.autoComplete ?? "off"}
+          placeholder={placeholder}
+          autoComplete={autoComplete}
           aria-invalid={!!error}
           data-invalid={!!error}
           onChange={(e) => onChange(e.target.value)}

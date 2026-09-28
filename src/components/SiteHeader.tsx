@@ -123,7 +123,7 @@ export function SiteHeader() {
           </ul>
           <div className="gold-line relative mt-10 w-full" />
           <p className="relative mt-6 text-[0.6rem] uppercase tracking-brand text-muted-foreground">
-            Spatial cleaning through sound
+            Space clearing through sound
           </p>
         </div>
       </div>

@@ -11,16 +11,17 @@ import { Reveal } from "@/components/Reveal";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Our Practice — AURAUM" },
+      { title: "Our Services — AURAUM" },
       {
         name: "description",
         content:
-          "Restore, Receive, Perform and Places of Exchange — sound-led sessions for homes, hospitality, workspaces and commercial spaces.",
+          "Home, Hospitality, Workplace, Retail and Occasion & Transition — sound-led sessions for the places where we live, work and gather.",
       },
-      { property: "og:title", content: "Our Practice — AURAUM" },
+      { property: "og:title", content: "Our Services — AURAUM" },
       {
         property: "og:description",
-        content: "Every place carries its own rhythm. AURAUM sessions are created around it.",
+        content:
+          "Every space has its own rhythm. AURAUM creates sound-led sessions shaped around the space, the people who use it and the moment they are moving through.",
       },
     ],
   }),
@@ -34,42 +35,44 @@ type Service = {
   tagline?: string;
   body: string[];
   suitable: string[];
+  buttonText: string;
+  bookServiceKey: string;
   img: string;
   alt: string;
 };
 
 const services: Service[] = [
   {
-    key: "restore",
-    name: "RESTORE",
+    key: "home",
+    name: "Home Sound Clearing",
+    sub: "For houses, apartments and private residences.",
     tagline: "A calmer home. A lighter you.",
     body: [
-      "For homes and residences that feel unsettled, heavy, recently changed, or simply in need of renewed energy.",
+      "For homes, residences that feel unsettled, heavy, newly changed, or simply in need of renewal energy. Sessions can also be arranged for properties being prepared for sale or rent.",
     ],
     suitable: [
       "New homes",
       "After renovation",
       "Periods of transition",
       "Before or after significant life changes",
-      "When a home no longer feels quite as it once did",
-      "New beginnings",
+      "Simply when a home no longer feels quite as it once did",
+      "For new beginnings",
       "Before marriage",
-      "When a property has been difficult to sell",
-      "When a property has been difficult to rent",
-      "When you simply feel that something within the space is stagnant, blocked or no longer flowing as it should",
+      "If you can’t sell your property",
+      "If you can’t rent your property",
+      "Or if you feel that some things are off",
     ],
+    buttonText: "Enquire about a home session",
+    bookServiceKey: "home",
     img: ritual,
     alt: "Incense bowl and olive plant on a stone ledge",
   },
   {
-    key: "receive",
-    name: "RECEIVE",
-    tagline: "Elevated guest experiences.",
-    body: [
-      "For hotels, restaurants and other spaces created to receive and welcome people.",
-      "AURAUM offers sound-led sessions designed to encourage a sense of calm, presence and harmony within the environment, while helping to release stagnant energy that may have accumulated over time.",
-      "The intention is to create a space that feels lighter, clearer and more welcoming, allowing guests to experience a greater sense of peace, ease and clarity.",
-    ],
+    key: "hospitality",
+    name: "Hospitality Sound Clearing",
+    sub: "For hotels, restaurants, clubs and guest spaces.",
+    tagline: "The atmosphere of a place shapes how people feel when they enter it.",
+    body: ["The atmosphere of a place shapes how people feel when they enter it."],
     suitable: [
       "Openings and launches",
       "Reopenings",
@@ -78,18 +81,18 @@ const services: Service[] = [
       "When a space no longer feels quite as it once did",
       "New intentions",
     ],
+    buttonText: "Enquire about a hospitality session",
+    bookServiceKey: "hospitality",
     img: aura,
     alt: "Soft golden light waves drifting through mist",
   },
   {
-    key: "perform",
-    name: "PERFORM",
-    sub: "Workspaces",
-    tagline: "Clarity for greater flow.",
+    key: "workplace",
+    name: "Workplace Sound Clearing",
+    sub: "For offices, studios, practices and shared workspaces.",
+    tagline: "A workplace holds the energy of the people and activities within it.",
     body: [
-      "The places where we work shape far more than productivity.",
-      "They influence focus, communication, energy and the way people experience and interact with one another.",
-      "AURAUM works with offices, studios and private workspaces to create environments that feel clearer, more grounded and more considered, supporting greater focus, flow and harmony within the space.",
+      "A workplace holds the energy of the people and activities within it. Influencing focus, communication, energy and the way people experience one another.",
     ],
     suitable: [
       "New openings",
@@ -99,20 +102,50 @@ const services: Service[] = [
       "When a workspace feels stagnant or unsettled",
       "When a space no longer feels quite as it once did",
     ],
+    buttonText: "Enquire about a workplace session",
+    bookServiceKey: "workplace",
     img: chakra,
     alt: "Golden concentric mandala of light",
   },
   {
-    key: "places-of-exchange",
-    name: "PLACES OF EXCHANGE",
-    sub: "Commercial Spaces",
-    tagline: "For spaces shaped by people, movement and purpose.",
+    key: "retail",
+    name: "Retail Sound Clearing",
+    sub: "For boutiques, bookshops, galleries, showrooms and other commercial spaces.",
     body: [
-      "Commercial spaces like boutiques, galleries, showrooms, salons, spaces each carry their own rhythm. AURAUM uses sound to recalibrate these environments, bringing greater clarity, balance and presence to the way they are experienced.",
+      "Using sound and intention, Isa works to bring a greater sense of balance, clarity and presence to the environment.",
     ],
-    suitable: ["Openings", "Transitions", "Renovations", "Moments of renewal"],
+    suitable: [
+      "New openings",
+      "New beginnings or intentions",
+      "Changes within a team or organisation",
+      "Periods of transition",
+      "When a workspace feels stagnant or unsettled",
+      "When a space no longer feels quite as it once did",
+    ],
+    buttonText: "Enquire about a retail session",
+    bookServiceKey: "retail",
     img: shadows,
     alt: "Olive branch shadows on warm plaster",
+  },
+  {
+    key: "occasion",
+    name: "Occasion & Transition Sound Session",
+    sub: "For meaningful moments, gatherings and new beginnings.",
+    body: [
+      "Some sessions are centred on an occasion rather than a particular kind of property. This might be a marriage, a new business, a private gathering, a retreat, a move or another significant life change.",
+      "Tell Isa what you are marking and where it will take place. She will consider an approach suited to the occasion, the space and the people involved.",
+    ],
+    suitable: [
+      "Marriages and unions",
+      "New businesses and launches",
+      "Private gatherings and retreats",
+      "Moves and significant life transitions",
+      "Moments deserving sacred intention",
+    ],
+    buttonText: "Enquire about an occasion session",
+    bookServiceKey: "occasion",
+    img: gong,
+    alt: "Sacred singing bowls and gong in warm candlelight",
   },
 ];
 
@@ -130,8 +163,8 @@ function ServicesPage() {
         <div className="veil absolute inset-0" />
         <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-14 md:px-10 md:pb-20">
           <Reveal>
-            <p className="text-[0.6rem] uppercase tracking-brand text-foreground/70">Services</p>
-            <h1 className="font-display mt-4 text-4xl sm:text-6xl md:text-7xl">Our Practice</h1>
+            <p className="text-[0.6rem] uppercase tracking-brand text-foreground/70">Auraum</p>
+            <h1 className="font-display mt-4 text-4xl sm:text-6xl md:text-7xl">OUR SERVICES</h1>
           </Reveal>
         </div>
       </section>
@@ -141,29 +174,22 @@ function ServicesPage() {
         <div className="mx-auto max-w-3xl space-y-7 text-center">
           <Reveal>
             <p className="font-display text-3xl leading-snug sm:text-4xl">
-              Every place carries its own rhythm.
+              Every space has its own rhythm.
             </p>
           </Reveal>
           <Reveal delay={120}>
             <p className="text-sm leading-loose text-muted-foreground">
-              AURAUM sessions are created around the space, the people within it, and the moment
-              they are moving through.
+              AURAUM creates sound-led sessions for the places where we live, work and gather,
+              shaped around the space, the people who use it and the moment they are moving through.
             </p>
           </Reveal>
           <Reveal delay={200}>
             <p className="text-sm leading-loose text-muted-foreground">
-              Through sound, vibration and intention, we help bring greater clarity, ease and
-              balance into the places where we live, work, gather, or any other space that may
-              need a little love to open the door to a new chapter.
+              Explore the services below and choose the setting that best describes yours. Isa will
+              discuss your needs before recommending an approach.
             </p>
           </Reveal>
           <Reveal delay={280}>
-            <p className="text-sm leading-loose text-muted-foreground">
-              By helping to release stagnant energy, we create space for renewal, movement and new
-              beginnings.
-            </p>
-          </Reveal>
-          <Reveal delay={360}>
             <div className="gold-line mx-auto mt-10 w-40" />
           </Reveal>
         </div>
@@ -196,7 +222,7 @@ function ServicesPage() {
             there.
           </p>
           <Link to="/book" className="btn-ritual mt-8">
-            Experience Auraum
+            Book a session
           </Link>
         </Reveal>
       </section>
@@ -231,11 +257,11 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
 
         <Reveal delay={120} className="min-w-0">
           <p className="font-display text-gold text-xl">0{index + 1}</p>
-          <h2 className="font-display mt-2 text-4xl leading-tight tracking-[0.12em] sm:text-5xl">
+          <h2 className="font-display mt-2 text-3xl leading-tight tracking-[0.08em] sm:text-4xl md:text-5xl">
             {service.name}
           </h2>
           {service.sub && (
-            <p className="mt-3 text-[0.6rem] uppercase tracking-brand text-muted-foreground">
+            <p className="mt-3 text-[0.65rem] uppercase tracking-brand text-muted-foreground">
               {service.sub}
             </p>
           )}
@@ -253,49 +279,51 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
             ))}
           </div>
 
-          <div className="mt-8 border-t border-border pt-6">
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-expanded={open}
-              className="flex w-full items-center justify-between gap-4 text-left"
-            >
-              <span className="text-[0.6rem] uppercase tracking-brand text-foreground/80">
-                Suitable for
-              </span>
-              <span
-                className={`text-gold transition-transform duration-500 ${open ? "rotate-45" : ""}`}
+          {service.suitable.length > 0 && (
+            <div className="mt-8 border-t border-border pt-6">
+              <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                aria-expanded={open}
+                className="flex w-full items-center justify-between gap-4 text-left"
               >
-                +
-              </span>
-            </button>
-            <div
-              className={`grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-              }`}
-            >
-              <ul className="overflow-hidden">
-                <li className="h-5" aria-hidden />
-                {service.suitable.map((item, i) => (
-                  <li
-                    key={item}
-                    style={{ transitionDelay: `${i * 40}ms` }}
-                    className="group flex gap-3 border-b border-border/60 py-3 text-sm leading-relaxed text-muted-foreground transition-colors duration-500 hover:text-foreground"
-                  >
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold transition-transform duration-500 group-hover:scale-150" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+                <span className="text-[0.6rem] uppercase tracking-brand text-foreground/80">
+                  Suitable for
+                </span>
+                <span
+                  className={`text-gold transition-transform duration-500 ${open ? "rotate-45" : ""}`}
+                >
+                  +
+                </span>
+              </button>
+              <div
+                className={`grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <ul className="overflow-hidden">
+                  <li className="h-5" aria-hidden />
+                  {service.suitable.map((item, i) => (
+                    <li
+                      key={item}
+                      style={{ transitionDelay: `${i * 40}ms` }}
+                      className="group flex gap-3 border-b border-border/60 py-3 text-sm leading-relaxed text-muted-foreground transition-colors duration-500 hover:text-foreground"
+                    >
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold transition-transform duration-500 group-hover:scale-150" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          )}
 
           <Link
             to="/book"
-            search={{ service: service.key }}
+            search={{ service: service.bookServiceKey }}
             className="btn-ritual mt-8 w-full sm:w-auto"
           >
-            Experience Auraum
+            {service.buttonText}
           </Link>
         </Reveal>
       </div>
