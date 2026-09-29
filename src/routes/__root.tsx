@@ -73,7 +73,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AURAUM — Space clearing through sound" },
+      { title: "AURAUM — Space clearing trough sound" },
       {
         name: "description",
         content: "Auraum clears and harmonises spaces through sound, intention and presence.",

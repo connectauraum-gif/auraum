@@ -17,7 +17,7 @@ export const Route = createFileRoute("/about")({
       {
         property: "og:description",
         content:
-          "Through sound, intention and presence, designed to cleanse, harmonise and restore balance to the places in which we live and work.",
+          "Trough sound, intention and presence, designed to cleanse, harmonise and restore balance to the places in which we live and work.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

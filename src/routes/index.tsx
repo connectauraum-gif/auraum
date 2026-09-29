@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Space clearing through sound. Auraum clears, balances and harmonises homes and studios.",
+          "Space clearing trough sound. Auraum clears, balances and harmonises homes and studios.",
       },
       { property: "og:title", content: "AURAUM — Every space holds something" },
       {
@@ -103,7 +103,7 @@ function Hero() {
             <p className="text-[0.6rem] uppercase leading-relaxed tracking-brand text-charcoal/80">
               Space clearing
               <br />
-              through sound
+              trough sound
             </p>
           </div>
 
@@ -147,9 +147,8 @@ function Manifesto() {
           loading="lazy"
           width={1024}
           height={1024}
-          className={`h-full w-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            visible ? "scale-100" : "scale-125"
-          }`}
+          className={`h-full w-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${visible ? "scale-100" : "scale-125"
+            }`}
         />
       </div>
 
@@ -180,9 +179,8 @@ function Manifesto() {
           loading="lazy"
           width={1280}
           height={960}
-          className={`h-full w-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            visible ? "scale-100" : "scale-125"
-          }`}
+          className={`h-full w-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${visible ? "scale-100" : "scale-125"
+            }`}
         />
       </div>
     </section>

@@ -34,11 +34,10 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
-          scrolled || open
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${scrolled || open
             ? "border-b border-stone/80 bg-bone/90 backdrop-blur-xl shadow-xs"
             : "border-b border-transparent bg-bone/40 backdrop-blur-xs"
-        }`}
+          }`}
       >
         <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-10">
           <Link to="/" className="flex min-w-0 items-center gap-3">
@@ -79,19 +78,16 @@ export function SiteHeader() {
           >
             <span className="sr-only">Menu</span>
             <span
-              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${
-                open ? "rotate-45" : "-translate-y-1.5"
-              }`}
+              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${open ? "rotate-45" : "-translate-y-1.5"
+                }`}
             />
             <span
-              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${
-                open ? "opacity-0" : "opacity-100"
-              }`}
+              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${open ? "opacity-0" : "opacity-100"
+                }`}
             />
             <span
-              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${
-                open ? "-rotate-45" : "translate-y-1.5"
-              }`}
+              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${open ? "-rotate-45" : "translate-y-1.5"
+                }`}
             />
           </button>
         </div>
@@ -99,9 +95,8 @@ export function SiteHeader() {
 
       {/* Mobile overlay menu */}
       <div
-        className={`fixed inset-0 z-40 grain bg-bone/98 backdrop-blur-2xl transition-all duration-700 md:hidden ${
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-        }`}
+        className={`fixed inset-0 z-40 grain bg-bone/98 backdrop-blur-2xl transition-all duration-700 md:hidden ${open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          }`}
       >
         <div className="flex h-full flex-col justify-center px-8">
           <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-stone/40 blur-3xl" />
@@ -110,9 +105,8 @@ export function SiteHeader() {
               <li
                 key={l.to}
                 style={{ transitionDelay: `${open ? 120 + i * 80 : 0}ms` }}
-                className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-                }`}
+                className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+                  }`}
               >
                 <Link
                   to={l.to}
@@ -125,7 +119,7 @@ export function SiteHeader() {
           </ul>
           <div className="gold-line relative mt-10 w-full" />
           <p className="relative mt-6 text-[0.6rem] uppercase tracking-brand text-sage">
-            Space clearing through sound
+            Space clearing trough sound
           </p>
         </div>
       </div>
