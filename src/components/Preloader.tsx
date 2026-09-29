@@ -46,17 +46,17 @@ export function Preloader() {
         }`}
         style={{
           background:
-            "radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 45%), #0b0b0b",
+            "radial-gradient(circle at center, rgba(214, 206, 196, 0.45), transparent 55%), #F5EFE6",
         }}
       >
-        <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
+        <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-stone/40 blur-3xl" />
 
         <div className="relative z-10 flex flex-col items-center px-6">
-          <div className="logo font-display mb-4 text-4xl tracking-[10px] text-white sm:text-5xl sm:tracking-[14px] md:text-6xl">
+          <div className="logo font-display mb-4 text-4xl tracking-[10px] text-charcoal sm:text-5xl sm:tracking-[14px] md:text-6xl">
             AURAUM
           </div>
 
-          <div className="tagline mb-10 text-xs uppercase tracking-[3px] text-white/70 sm:text-sm">
+          <div className="tagline mb-10 text-xs uppercase tracking-[3px] text-sage font-medium sm:text-sm">
             ENTER YOUR FREQUENCY
           </div>
 
@@ -64,7 +64,7 @@ export function Preloader() {
             id="enterBtn"
             type="button"
             onClick={handleEnter}
-            className="cursor-pointer rounded-full border border-white/50 bg-transparent px-9 py-3.5 text-xs tracking-[2px] text-white outline-none transition-all duration-300 hover:bg-white hover:text-[#0b0b0b] sm:text-sm"
+            className="cursor-pointer rounded-full border border-charcoal/40 bg-stone/30 px-9 py-3.5 text-xs tracking-[2px] text-charcoal outline-none transition-all duration-300 hover:border-charcoal hover:bg-charcoal hover:text-bone sm:text-sm"
           >
             ENTER EXPERIENCE
           </button>

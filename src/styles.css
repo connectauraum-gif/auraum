@@ -37,41 +37,54 @@
   --color-sand-foreground: var(--sand-foreground);
   --color-gold: var(--gold);
   --color-ink: var(--ink);
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Jost", system-ui, sans-serif;
+  --color-bone: var(--bone);
+  --color-stone: var(--stone);
+  --color-charcoal: var(--charcoal);
+  --color-sage: var(--sage);
+  --font-display: "EB Garamond", "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Lato", "Jost", system-ui, sans-serif;
 }
 
 :root {
   --radius: 0.25rem;
-  --background: oklch(0.17 0.017 62);
-  --foreground: oklch(0.94 0.014 82);
-  --card: oklch(0.22 0.021 62);
-  --card-foreground: oklch(0.94 0.014 82);
-  --popover: oklch(0.22 0.021 62);
-  --popover-foreground: oklch(0.94 0.014 82);
-  --primary: oklch(0.78 0.105 76);
-  --primary-foreground: oklch(0.18 0.02 62);
-  --secondary: oklch(0.28 0.022 62);
-  --secondary-foreground: oklch(0.94 0.014 82);
-  --muted: oklch(0.26 0.018 62);
-  --muted-foreground: oklch(0.72 0.02 78);
-  --accent: oklch(0.78 0.105 76);
-  --accent-foreground: oklch(0.18 0.02 62);
-  --destructive: oklch(0.58 0.2 27);
-  --destructive-foreground: oklch(0.97 0.01 80);
-  --border: oklch(0.94 0.014 82 / 16%);
-  --input: oklch(0.94 0.014 82 / 22%);
-  --ring: oklch(0.78 0.105 76);
-  --sand: oklch(0.91 0.018 82);
-  --sand-foreground: oklch(0.26 0.026 60);
-  --gold: oklch(0.78 0.105 76);
-  --ink: oklch(0.2 0.02 60);
 
-  --shadow-glow: 0 0 60px -10px color-mix(in oklab, var(--gold) 45%, transparent);
+  /* AURAUM Brand Palette Specification */
+  --bone: #f5efe6;
+  --stone: #d6cec4;
+  --charcoal: #2e2b26;
+  --gold: #a68f6a;
+  --sage: #8c9a8e;
+
+  /* Theme Tokens: Light Theme Direction */
+  --background: #f5efe6;
+  --foreground: #2e2b26;
+  --card: #d6cec4;
+  --card-foreground: #2e2b26;
+  --popover: #f5efe6;
+  --popover-foreground: #2e2b26;
+  --primary: #a68f6a;
+  --primary-foreground: #f5efe6;
+  --secondary: #d6cec4;
+  --secondary-foreground: #2e2b26;
+  --muted: #d6cec4;
+  --muted-foreground: rgba(46, 43, 38, 0.68);
+  --accent: #8c9a8e;
+  --accent-foreground: #f5efe6;
+  --destructive: #b94a48;
+  --destructive-foreground: #f5efe6;
+  --border: rgba(46, 43, 38, 0.15);
+  --input: rgba(46, 43, 38, 0.2);
+  --ring: #a68f6a;
+  --sand: #d6cec4;
+  --sand-foreground: #2e2b26;
+  --ink: #2e2b26;
+
+  --shadow-glow: 0 0 45px -10px rgba(166, 143, 106, 0.35);
   --gradient-veil: linear-gradient(
     to top,
-    color-mix(in oklab, var(--background) 92%, transparent),
-    transparent 55%
+    #f5efe6 0%,
+    rgba(245, 239, 230, 0.85) 45%,
+    transparent 100%
   );
 }
 
@@ -124,12 +137,7 @@
 
 @utility gold-line {
   height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    color-mix(in oklab, var(--gold) 80%, transparent),
-    transparent
-  );
+  background: linear-gradient(to right, transparent, rgba(166, 143, 106, 0.65), transparent);
 }
 
 @utility grain {
@@ -139,8 +147,8 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.18;
-    mix-blend-mode: overlay;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   }
 }
@@ -193,9 +201,9 @@
   font-size: 0.7rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  border: 1px solid color-mix(in oklab, var(--gold) 60%, transparent);
-  color: var(--foreground);
-  background: color-mix(in oklab, var(--ink) 45%, transparent);
+  border: 1px solid var(--gold);
+  color: var(--charcoal);
+  background: rgba(214, 206, 196, 0.45);
   backdrop-filter: blur(6px);
   transition:
     color 0.5s ease,
@@ -211,7 +219,7 @@
     z-index: -1;
   }
   &:hover {
-    color: var(--primary-foreground);
+    color: var(--bone);
     border-color: var(--gold);
     box-shadow: var(--shadow-glow);
   }
@@ -306,9 +314,9 @@
 @utility shimmer-text {
   background: linear-gradient(
     90deg,
-    color-mix(in oklab, var(--foreground) 70%, transparent) 20%,
+    rgba(46, 43, 38, 0.8) 20%,
     var(--gold) 50%,
-    color-mix(in oklab, var(--foreground) 70%, transparent) 80%
+    rgba(46, 43, 38, 0.8) 80%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;

@@ -36,8 +36,8 @@ export function SiteHeader() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
           scrolled || open
-            ? "border-b border-border bg-background/80 backdrop-blur-xl"
-            : "border-b border-transparent"
+            ? "border-b border-stone/80 bg-bone/90 backdrop-blur-xl shadow-xs"
+            : "border-b border-transparent bg-bone/40 backdrop-blur-xs"
         }`}
       >
         <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-10">
@@ -49,7 +49,9 @@ export function SiteHeader() {
               height={28}
               className="h-7 w-7 shrink-0 animate-spin-slow"
             />
-            <span className="font-display truncate text-lg tracking-brand">AURAUM</span>
+            <span className="font-display truncate text-lg tracking-brand text-charcoal">
+              AURAUM
+            </span>
           </Link>
 
           <nav className="hidden items-center gap-9 md:flex">
@@ -57,7 +59,7 @@ export function SiteHeader() {
               <Link
                 key={l.to}
                 to={l.to}
-                className="link-underline text-[0.65rem] uppercase tracking-brand text-foreground/75 transition-colors hover:text-foreground"
+                className="link-underline text-[0.65rem] uppercase tracking-brand text-charcoal/80 transition-colors hover:text-charcoal"
                 data-active={pathname === l.to}
               >
                 {l.label}
@@ -73,21 +75,21 @@ export function SiteHeader() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="relative z-50 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border md:hidden"
+            className="relative z-50 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-stone/80 bg-bone/70 md:hidden"
           >
             <span className="sr-only">Menu</span>
             <span
-              className={`absolute h-px w-5 bg-foreground transition-all duration-500 ${
+              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${
                 open ? "rotate-45" : "-translate-y-1.5"
               }`}
             />
             <span
-              className={`absolute h-px w-5 bg-foreground transition-all duration-500 ${
+              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${
                 open ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
-              className={`absolute h-px w-5 bg-foreground transition-all duration-500 ${
+              className={`absolute h-px w-5 bg-charcoal transition-all duration-500 ${
                 open ? "-rotate-45" : "translate-y-1.5"
               }`}
             />
@@ -97,12 +99,12 @@ export function SiteHeader() {
 
       {/* Mobile overlay menu */}
       <div
-        className={`fixed inset-0 z-40 grain bg-background/97 backdrop-blur-2xl transition-all duration-700 md:hidden ${
+        className={`fixed inset-0 z-40 grain bg-bone/98 backdrop-blur-2xl transition-all duration-700 md:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
         <div className="flex h-full flex-col justify-center px-8">
-          <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
+          <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-stone/40 blur-3xl" />
           <ul className="relative space-y-5">
             {[...links, { to: "/book", label: "Book a session" } as const].map((l, i) => (
               <li
@@ -114,7 +116,7 @@ export function SiteHeader() {
               >
                 <Link
                   to={l.to}
-                  className="font-display block text-4xl text-foreground/90 transition-colors hover:text-gold"
+                  className="font-display block text-4xl text-charcoal/90 transition-colors hover:text-gold"
                 >
                   {l.label}
                 </Link>
@@ -122,7 +124,7 @@ export function SiteHeader() {
             ))}
           </ul>
           <div className="gold-line relative mt-10 w-full" />
-          <p className="relative mt-6 text-[0.6rem] uppercase tracking-brand text-muted-foreground">
+          <p className="relative mt-6 text-[0.6rem] uppercase tracking-brand text-sage">
             Space clearing through sound
           </p>
         </div>
