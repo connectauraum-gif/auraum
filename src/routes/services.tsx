@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import gong from "@/assets/gong.jpg";
 import aura from "@/assets/aura.jpg";
-import ritual from "@/assets/ritual.jpg";
-import shadows from "@/assets/shadows.jpg";
 import soundbath from "@/assets/soundbath.jpg";
-import chakra from "@/assets/chakra.jpg";
+import serviceHome from "@/assets/service-home.jpg";
+import serviceWorkplace from "@/assets/service-workplace.jpg";
+import serviceRetail from "@/assets/service-retail.jpg";
+import serviceOccasion from "@/assets/service-occasion.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/services")({
@@ -39,6 +39,8 @@ type Service = {
   bookServiceKey: string;
   img: string;
   alt: string;
+  width?: number;
+  height?: number;
 };
 
 const services: Service[] = [
@@ -64,8 +66,10 @@ const services: Service[] = [
     ],
     buttonText: "Enquire about a home session",
     bookServiceKey: "home",
-    img: ritual,
-    alt: "Incense bowl and olive plant on a stone ledge",
+    img: serviceHome,
+    alt: "Tibetan singing bowls arranged in a sunlit home interior with natural wood and linen",
+    width: 720,
+    height: 894,
   },
   {
     key: "hospitality",
@@ -85,6 +89,8 @@ const services: Service[] = [
     bookServiceKey: "hospitality",
     img: aura,
     alt: "Soft golden light waves drifting through mist",
+    width: 1024,
+    height: 900,
   },
   {
     key: "workplace",
@@ -104,8 +110,10 @@ const services: Service[] = [
     ],
     buttonText: "Enquire about a workplace session",
     bookServiceKey: "workplace",
-    img: chakra,
-    alt: "Golden concentric mandala of light",
+    img: serviceWorkplace,
+    alt: "Hands holding and playing a sacred singing bowl for workplace clarity and focus",
+    width: 1024,
+    height: 576,
   },
   {
     key: "retail",
@@ -124,8 +132,10 @@ const services: Service[] = [
     ],
     buttonText: "Enquire about a retail session",
     bookServiceKey: "retail",
-    img: shadows,
-    alt: "Olive branch shadows on warm plaster",
+    img: serviceRetail,
+    alt: "Sound practitioner with bamboo Koshi chime and resonant singing bowl in warm light",
+    width: 640,
+    height: 640,
   },
   {
     key: "occasion",
@@ -144,8 +154,10 @@ const services: Service[] = [
     ],
     buttonText: "Enquire about an occasion session",
     bookServiceKey: "occasion",
-    img: gong,
-    alt: "Sacred singing bowls and gong in warm candlelight",
+    img: serviceOccasion,
+    alt: "Overhead view of an intentional sound session ceremony on a mandala cloth with singing bowls",
+    width: 1024,
+    height: 576,
   },
 ];
 
@@ -249,8 +261,8 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
             src={service.img}
             alt={service.alt}
             loading="lazy"
-            width={1024}
-            height={900}
+            width={service.width || 1024}
+            height={service.height || 900}
             className="h-72 w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 md:h-[34rem]"
           />
         </Reveal>
