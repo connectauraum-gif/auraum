@@ -110,24 +110,40 @@ export const Route = createFileRoute("/book")({
 const emailRe = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 const phoneRe = /^[+]?[\d\s()-]{7,20}$/;
 
+type FormValues = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  city?: string;
+  period?: string;
+  spaceOrOccasion?: string;
+  intention?: string;
+  sizeAndFloors?: string;
+  people?: string;
+  recentChange?: string;
+  operatingHours?: string;
+  anythingElse?: string;
+};
+
+type FormErrors = Partial<FormValues> & {
+  service?: string;
+};
+
 function BookPage() {
   const search = Route.useSearch();
   const preselected = "service" in search ? search.service : undefined;
   const [activeKey, setActiveKey] = useState<string | null>(preselected ?? null);
-  const [values, setValues] = useState<Record<string, string>>({});
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [values, setValues] = useState<FormValues>({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const activeService = SERVICES.find((c) => c.key === activeKey) ?? null;
 
   const choose = (key: string) => {
     setActiveKey(key);
     setErrors({});
-    setSent(false);
   };
 
-  const handleFieldChange = (name: string, val: string) => {
+  const handleFieldChange = (name: keyof FormValues, val: string) => {
     setValues((prev) => ({ ...prev, [name]: val }));
     if (errors[name]) {
       setErrors((prev) => {
@@ -145,7 +161,7 @@ function BookPage() {
       return;
     }
 
-    const errs: Record<string, string> = {};
+    const errs: FormErrors = {};
     if (!values.name?.trim()) errs.name = "Please enter your name.";
     if (!values.email?.trim()) {
       errs.email = "Please enter your email address.";
@@ -168,12 +184,60 @@ function BookPage() {
       return;
     }
 
-    setSending(true);
-    setTimeout(() => {
-      setSending(false);
-      setSent(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 1100);
+    const selectedService = SERVICES.find((s) => s.key === activeKey);
+    const serviceName = selectedService?.name ?? "";
+    const clientName = values.name?.trim() ?? "";
+
+    const subject = `AURAUM Session Enquiry — ${serviceName} — ${clientName}`;
+
+    const formatField = (val?: string) => {
+      const trimmed = val?.trim();
+      return trimmed && trimmed.length > 0 ? trimmed : "Not specified";
+    };
+
+    const body = [
+      "NEW AURAUM SESSION ENQUIRY",
+      "",
+      "SERVICE",
+      serviceName,
+      "",
+      "CLIENT DETAILS",
+      "",
+      `Name: ${formatField(values.name)}`,
+      `Email: ${formatField(values.email)}`,
+      `Telephone / WhatsApp: ${formatField(values.phone)}`,
+      `City & Country: ${formatField(values.city)}`,
+      `Preferred Date / Period: ${formatField(values.period)}`,
+      "",
+      "SESSION DETAILS",
+      "",
+      "Space / Occasion:",
+      formatField(values.spaceOrOccasion),
+      "",
+      "Intention:",
+      formatField(values.intention),
+      "",
+      "Approximate Size / Floors:",
+      formatField(values.sizeAndFloors),
+      "",
+      "Approximate People:",
+      formatField(values.people),
+      "",
+      "Recent Change / Opening / Event:",
+      formatField(values.recentChange),
+      "",
+      "Operating Hours Preference:",
+      formatField(values.operatingHours),
+      "",
+      "Anything Else:",
+      formatField(values.anythingElse),
+      "",
+      "==========================",
+      "Submitted via AURAUM website",
+    ].join("\n");
+
+    const mailto = `mailto:hello@auraum.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
   };
 
   return (
@@ -197,243 +261,207 @@ function BookPage() {
           </div>
         </Reveal>
 
-        {sent ? (
-          <Reveal className="mt-14 border border-gold/40 bg-card/50 p-8 text-center sm:p-12">
-            <div className="relative mx-auto grid h-24 w-24 place-items-center">
-              {[0, 1].map((i) => (
-                <span
-                  key={i}
-                  style={{ animationDelay: `${i * 1.6}s` }}
-                  className="animate-ripple absolute h-16 w-16 rounded-full border border-gold/50"
-                />
-              ))}
-              <span className="h-2 w-2 rounded-full bg-gold shadow-[0_0_20px_var(--gold)]" />
-            </div>
-            <p className="font-display mt-6 text-2xl leading-relaxed sm:text-3xl">
-              Thank you. Your request has been received. The AURAUM team will be in touch with you
-              shortly.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSent(false);
-                setActiveKey(null);
-                setValues({});
-              }}
-              className="btn-ritual mt-10"
-            >
-              Send another request
-            </button>
-          </Reveal>
-        ) : (
-          <>
-            <Reveal delay={100} className="mt-16">
-              <p className="text-center text-[0.65rem] uppercase tracking-brand text-foreground/80">
-                Choose a service:
-              </p>
-              {errors.service && (
-                <p className="mt-2 text-center text-xs text-destructive">{errors.service}</p>
-              )}
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {SERVICES.map((s) => {
-                  const on = s.key === activeKey;
-                  return (
-                    <button
-                      key={s.key}
-                      type="button"
-                      onClick={() => choose(s.key)}
-                      aria-pressed={on}
-                      className={`group border p-5 text-left transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                        on
-                          ? "border-gold bg-card/60"
-                          : "border-border hover:border-gold/60 hover:bg-card/30"
-                      } ${s.key === "occasion" ? "sm:col-span-2" : ""}`}
-                    >
-                      <span className="flex items-center gap-3">
-                        <span
-                          className={`h-1.5 w-1.5 rounded-full transition-all duration-500 ${
-                            on ? "bg-gold shadow-[0_0_14px_var(--gold)]" : "bg-border"
-                          }`}
-                        />
-                        <span className="font-display text-xl tracking-[0.08em]">{s.name}</span>
-                      </span>
-                      <span className="mt-2 block text-xs leading-relaxed text-muted-foreground">
-                        {s.sub}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </Reveal>
-
-            {activeService && (
-              <Reveal key={activeService.key} delay={80} className="mt-14">
-                <div className="gold-line w-full" />
-                <div className="mt-10 flex flex-wrap items-baseline justify-between gap-4">
-                  <h2 className="font-display text-3xl tracking-[0.08em] sm:text-4xl">
-                    {activeService.name}
-                  </h2>
-                  <span className="text-[0.6rem] uppercase tracking-brand text-muted-foreground">
-                    {activeService.sub}
+        <Reveal delay={100} className="mt-16">
+          <p className="text-center text-[0.65rem] uppercase tracking-brand text-foreground/80">
+            Choose a service:
+          </p>
+          {errors.service && (
+            <p className="mt-2 text-center text-xs text-destructive">{errors.service}</p>
+          )}
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {SERVICES.map((s) => {
+              const on = s.key === activeKey;
+              return (
+                <button
+                  key={s.key}
+                  type="button"
+                  onClick={() => choose(s.key)}
+                  aria-pressed={on}
+                  className={`group border p-5 text-left transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    on
+                      ? "border-gold bg-card/60"
+                      : "border-border hover:border-gold/60 hover:bg-card/30"
+                  } ${s.key === "occasion" ? "sm:col-span-2" : ""}`}
+                >
+                  <span className="flex items-center gap-3">
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full transition-all duration-500 ${
+                        on ? "bg-gold shadow-[0_0_14px_var(--gold)]" : "bg-border"
+                      }`}
+                    />
+                    <span className="font-display text-xl tracking-[0.08em]">{s.name}</span>
                   </span>
+                  <span className="mt-2 block text-xs leading-relaxed text-muted-foreground">
+                    {s.sub}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </Reveal>
+
+        {activeService && (
+          <Reveal key={activeService.key} delay={80} className="mt-14">
+            <div className="gold-line w-full" />
+            <div className="mt-10 flex flex-wrap items-baseline justify-between gap-4">
+              <h2 className="font-display text-3xl tracking-[0.08em] sm:text-4xl">
+                {activeService.name}
+              </h2>
+              <span className="text-[0.6rem] uppercase tracking-brand text-muted-foreground">
+                {activeService.sub}
+              </span>
+            </div>
+
+            <form onSubmit={onSubmit} noValidate className="mt-12 space-y-14">
+              {/* Section 1: Your details */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-display text-2xl tracking-[0.06em] text-foreground">
+                    Your details
+                  </h3>
+                  <div className="gold-line mt-2 w-16" />
                 </div>
 
-                <form onSubmit={onSubmit} noValidate className="mt-12 space-y-14">
-                  {/* Section 1: Your details */}
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="font-display text-2xl tracking-[0.06em] text-foreground">
-                        Your details
-                      </h3>
-                      <div className="gold-line mt-2 w-16" />
-                    </div>
+                <div className="grid gap-8 sm:grid-cols-2">
+                  <FormField
+                    name="name"
+                    label="Name"
+                    required
+                    value={values.name ?? ""}
+                    placeholder="Your full name"
+                    autoComplete="name"
+                    error={errors.name}
+                    onChange={(v) => handleFieldChange("name", v)}
+                  />
 
-                    <div className="grid gap-8 sm:grid-cols-2">
-                      <FormField
-                        name="name"
-                        label="Name"
-                        required
-                        value={values.name ?? ""}
-                        placeholder="Your full name"
-                        autoComplete="name"
-                        error={errors.name}
-                        onChange={(v) => handleFieldChange("name", v)}
-                      />
+                  <FormField
+                    name="email"
+                    label="Email"
+                    type="email"
+                    required
+                    value={values.email ?? ""}
+                    placeholder="you@email.com"
+                    autoComplete="email"
+                    error={errors.email}
+                    onChange={(v) => handleFieldChange("email", v)}
+                  />
 
-                      <FormField
-                        name="email"
-                        label="Email"
-                        type="email"
-                        required
-                        value={values.email ?? ""}
-                        placeholder="you@email.com"
-                        autoComplete="email"
-                        error={errors.email}
-                        onChange={(v) => handleFieldChange("email", v)}
-                      />
+                  <FormField
+                    name="phone"
+                    label="Telephone / WhatsApp"
+                    type="tel"
+                    required
+                    value={values.phone ?? ""}
+                    placeholder="+91 99588 82810"
+                    autoComplete="tel"
+                    error={errors.phone}
+                    onChange={(v) => handleFieldChange("phone", v)}
+                  />
 
-                      <FormField
-                        name="phone"
-                        label="Telephone / WhatsApp"
-                        type="tel"
-                        required
-                        value={values.phone ?? ""}
-                        placeholder="+91 99588 82810"
-                        autoComplete="tel"
-                        error={errors.phone}
-                        onChange={(v) => handleFieldChange("phone", v)}
-                      />
+                  <FormField
+                    name="city"
+                    label="City and country"
+                    required
+                    value={values.city ?? ""}
+                    placeholder="e.g. London, UK / Mumbai, India"
+                    error={errors.city}
+                    onChange={(v) => handleFieldChange("city", v)}
+                  />
 
-                      <FormField
-                        name="city"
-                        label="City and country"
-                        required
-                        value={values.city ?? ""}
-                        placeholder="e.g. London, UK / Mumbai, India"
-                        error={errors.city}
-                        onChange={(v) => handleFieldChange("city", v)}
-                      />
+                  <FormField
+                    name="period"
+                    label="Preferred date or period"
+                    value={values.period ?? ""}
+                    placeholder="e.g. Late October, or a specific date"
+                    full
+                    onChange={(v) => handleFieldChange("period", v)}
+                  />
+                </div>
+              </div>
 
-                      <FormField
-                        name="period"
-                        label="Preferred date or period"
-                        value={values.period ?? ""}
-                        placeholder="e.g. Late October, or a specific date"
-                        full
-                        onChange={(v) => handleFieldChange("period", v)}
-                      />
-                    </div>
-                  </div>
+              {/* Section 2: Tell us about the session */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-display text-2xl tracking-[0.06em] text-foreground">
+                    Tell us about the session
+                  </h3>
+                  <div className="gold-line mt-2 w-16" />
+                </div>
 
-                  {/* Section 2: Tell us about the session */}
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="font-display text-2xl tracking-[0.06em] text-foreground">
-                        Tell us about the session
-                      </h3>
-                      <div className="gold-line mt-2 w-16" />
-                    </div>
+                <div className="grid gap-8 sm:grid-cols-2">
+                  <FormField
+                    name="spaceOrOccasion"
+                    label="What type of space or occasion is this?"
+                    value={values.spaceOrOccasion ?? ""}
+                    placeholder="e.g. Private apartment, restaurant, creative office, gallery, wedding…"
+                    full
+                    onChange={(v) => handleFieldChange("spaceOrOccasion", v)}
+                  />
 
-                    <div className="grid gap-8 sm:grid-cols-2">
-                      <FormField
-                        name="spaceOrOccasion"
-                        label="What type of space or occasion is this?"
-                        value={values.spaceOrOccasion ?? ""}
-                        placeholder="e.g. Private apartment, restaurant, creative office, gallery, wedding…"
-                        full
-                        onChange={(v) => handleFieldChange("spaceOrOccasion", v)}
-                      />
+                  <FormField
+                    name="intention"
+                    label="What would you like the session to address or mark?"
+                    type="textarea"
+                    value={values.intention ?? ""}
+                    placeholder="Tell us what you would like to shift, restore, clear or celebrate within the space…"
+                    full
+                    onChange={(v) => handleFieldChange("intention", v)}
+                  />
 
-                      <FormField
-                        name="intention"
-                        label="What would you like the session to address or mark?"
-                        type="textarea"
-                        value={values.intention ?? ""}
-                        placeholder="Tell us what you would like to shift, restore, clear or celebrate within the space…"
-                        full
-                        onChange={(v) => handleFieldChange("intention", v)}
-                      />
+                  <FormField
+                    name="sizeAndFloors"
+                    label="Approximate size of the space and number of floors, if applicable"
+                    value={values.sizeAndFloors ?? ""}
+                    placeholder="e.g. 250 m² / 2 floors"
+                    onChange={(v) => handleFieldChange("sizeAndFloors", v)}
+                  />
 
-                      <FormField
-                        name="sizeAndFloors"
-                        label="Approximate size of the space and number of floors, if applicable"
-                        value={values.sizeAndFloors ?? ""}
-                        placeholder="e.g. 250 m² / 2 floors"
-                        onChange={(v) => handleFieldChange("sizeAndFloors", v)}
-                      />
+                  <FormField
+                    name="people"
+                    label="Approximate number of people who use the space or will attend"
+                    value={values.people ?? ""}
+                    placeholder="e.g. 4 residents, 15 team members, or 50 guests"
+                    onChange={(v) => handleFieldChange("people", v)}
+                  />
 
-                      <FormField
-                        name="people"
-                        label="Approximate number of people who use the space or will attend"
-                        value={values.people ?? ""}
-                        placeholder="e.g. 4 residents, 15 team members, or 50 guests"
-                        onChange={(v) => handleFieldChange("people", v)}
-                      />
+                  <FormField
+                    name="recentChange"
+                    label="Is there a recent change, opening or event we should know about?"
+                    type="textarea"
+                    value={values.recentChange ?? ""}
+                    placeholder="e.g. Recent renovation, upcoming opening, team transition, sale preparation…"
+                    full
+                    onChange={(v) => handleFieldChange("recentChange", v)}
+                  />
 
-                      <FormField
-                        name="recentChange"
-                        label="Is there a recent change, opening or event we should know about?"
-                        type="textarea"
-                        value={values.recentChange ?? ""}
-                        placeholder="e.g. Recent renovation, upcoming opening, team transition, sale preparation…"
-                        full
-                        onChange={(v) => handleFieldChange("recentChange", v)}
-                      />
+                  <FormField
+                    name="operatingHours"
+                    label="For hospitality and other operating businesses, please also tell us whether you would prefer the session before, during or outside operating hours."
+                    value={values.operatingHours ?? ""}
+                    placeholder="e.g. Before operating hours, outside operating hours, or flexible"
+                    full
+                    onChange={(v) => handleFieldChange("operatingHours", v)}
+                  />
 
-                      <FormField
-                        name="operatingHours"
-                        label="For hospitality and other operating businesses, please also tell us whether you would prefer the session before, during or outside operating hours."
-                        value={values.operatingHours ?? ""}
-                        placeholder="e.g. Before operating hours, outside operating hours, or flexible"
-                        full
-                        onChange={(v) => handleFieldChange("operatingHours", v)}
-                      />
+                  <FormField
+                    name="anythingElse"
+                    label="Is there anything else you would like Isa to know?"
+                    type="textarea"
+                    value={values.anythingElse ?? ""}
+                    placeholder="Any additional details, intentions, or notes for Isa…"
+                    full
+                    onChange={(v) => handleFieldChange("anythingElse", v)}
+                  />
+                </div>
+              </div>
 
-                      <FormField
-                        name="anythingElse"
-                        label="Is there anything else you would like Isa to know?"
-                        type="textarea"
-                        value={values.anythingElse ?? ""}
-                        placeholder="Any additional details, intentions, or notes for Isa…"
-                        full
-                        onChange={(v) => handleFieldChange("anythingElse", v)}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="pt-4">
-                    <button
-                      type="submit"
-                      disabled={sending}
-                      className="btn-ritual w-full sm:w-auto"
-                    >
-                      {sending ? "Sending…" : "Book a session"}
-                    </button>
-                  </div>
-                </form>
-              </Reveal>
-            )}
-          </>
+              <div className="pt-4">
+                <button type="submit" className="btn-ritual w-full sm:w-auto">
+                  Book a session
+                </button>
+              </div>
+            </form>
+          </Reveal>
         )}
       </div>
     </section>
