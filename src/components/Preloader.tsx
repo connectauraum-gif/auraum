@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 export function Preloader() {
   const [entered, setEntered] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -12,32 +11,25 @@ export function Preloader() {
     };
   }, [entered]);
 
+  useEffect(() => {
+    // Attempt playback on load if allowed by browser policy
+    if (audioRef.current) {
+      audioRef.current.volume = 0.35;
+      audioRef.current.play().catch(() => {
+        // Will play upon clicking Enter Experience
+      });
+    }
+  }, []);
+
   const handleEnter = async () => {
     setEntered(true);
-    if (audioRef.current) {
+    if (audioRef.current && audioRef.current.paused) {
       try {
         audioRef.current.volume = 0.35;
         await audioRef.current.play();
-        setIsPlaying(true);
       } catch (error) {
         console.log("Audio could not start:", error);
       }
-    }
-  };
-
-  const toggleSound = async () => {
-    if (!audioRef.current) return;
-
-    if (audioRef.current.paused) {
-      try {
-        await audioRef.current.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.log("Audio playback failed:", error);
-      }
-    } else {
-      audioRef.current.pause();
-      setIsPlaying(false);
     }
   };
 
@@ -79,21 +71,8 @@ export function Preloader() {
         </div>
       </div>
 
-      {/* HEALING SOUND */}
-      <audio
-        ref={audioRef}
-        id="healingSound"
-        loop
-        preload="auto"
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-        onEnded={() => {
-          if (audioRef.current) {
-            audioRef.current.currentTime = 0;
-            audioRef.current.play().catch(() => {});
-          }
-        }}
-      >
+      {/* HEALING SOUND - Plays once at the start, does not replay */}
+      <audio ref={audioRef} id="healingSound" preload="auto">
         <source
           src="/freesound_community-e-flat-tibetan-singing-bowl-struck-38746.mp3"
           type="audio/mpeg"
@@ -102,19 +81,6 @@ export function Preloader() {
         <source src="/healing-sound.wav" type="audio/wav" />
         Your browser does not support audio.
       </audio>
-
-      {/* SOUND BUTTON */}
-      <button
-        id="soundControl"
-        type="button"
-        aria-label="Toggle sound"
-        onClick={toggleSound}
-        className={`fixed bottom-22 right-5 z-50 grid h-[50px] w-[50px] cursor-pointer place-items-center rounded-full border border-white/40 bg-black/60 text-lg text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-black md:bottom-26 md:right-8 ${
-          entered ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-      >
-        {isPlaying ? "🔊" : "🔇"}
-      </button>
     </>
   );
 }

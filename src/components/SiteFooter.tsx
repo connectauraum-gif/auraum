@@ -25,9 +25,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="text-[0.6rem] uppercase tracking-brand text-muted-foreground">
-              Explore
-            </p>
+            <p className="text-[0.6rem] uppercase tracking-brand text-muted-foreground">Explore</p>
             <ul className="mt-5 space-y-3 text-sm text-foreground/75">
               {[
                 { to: "/", label: "Home" },
@@ -46,9 +44,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="text-[0.6rem] uppercase tracking-brand text-muted-foreground">
-              Contact
-            </p>
+            <p className="text-[0.6rem] uppercase tracking-brand text-muted-foreground">Contact</p>
             <ul className="mt-5 space-y-3 text-sm text-foreground/75">
               <li>
                 <a href="mailto:hello@auraum.in" className="link-underline hover:text-gold">
@@ -58,6 +54,18 @@ export function SiteFooter() {
               <li>
                 <a href="tel:+919958882810" className="link-underline hover:text-gold">
                   +91 99588 82810
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`https://wa.me/919958882810?text=${encodeURIComponent(
+                    "Hello AURAUM, I would like to know more about booking a session for my space.",
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline hover:text-gold"
+                >
+                  WhatsApp: +91 99588 82810
                 </a>
               </li>
               <li className="text-muted-foreground">By appointment only</li>
