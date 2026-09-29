@@ -1,1 +1,0 @@
-var e=`/assets/gong-DUhC4XAL.jpg`;export{e as t};
