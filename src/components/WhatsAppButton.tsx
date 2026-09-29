@@ -10,7 +10,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with AURAUM on WhatsApp"
-      className="fixed bottom-5 right-5 z-50 grid h-13 w-13 place-items-center rounded-full border border-stone bg-bone/90 text-charcoal shadow-lg backdrop-blur-xl transition-all duration-500 hover:scale-110 hover:border-gold hover:text-gold md:bottom-8 md:right-8"
+      className="fixed bottom-5 right-5 z-50 grid h-13 w-13 place-items-center rounded-full border border-gold/40 bg-background/80 text-gold shadow-lg backdrop-blur-xl transition-all duration-500 hover:scale-110 hover:border-gold hover:text-foreground md:bottom-8 md:right-8"
       style={{ height: "3.25rem", width: "3.25rem" }}
     >
       <span className="animate-breathe pointer-events-none absolute inset-0 rounded-full bg-gold/15 blur-md" />
