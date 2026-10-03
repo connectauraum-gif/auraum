@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import hero from "@/assets/hero.jpg";
-import ripples from "@/assets/ripples.jpg";
-import soundbath from "@/assets/soundbath.jpg";
-import meditation from "@/assets/meditation.jpg";
+import hero from "@/assets/isa-person (1).jpeg";
+import ripples from "@/assets/isa-person (2).jpeg";
+import soundbath from "@/assets/isa-person (3).jpeg";
+import meditation from "@/assets/isa-person (4).jpeg";
 import chakra from "@/assets/chakra.jpg";
 import shadows from "@/assets/shadows.jpg";
-import vortex from "@/assets/vortex.jpg";
+import vortex from "@/assets/isa-person (5).jpeg";
 import { Reveal, useInView } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
