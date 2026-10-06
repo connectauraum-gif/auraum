@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import aura from "@/assets/isa-person (8).jpeg";
-import soundbath from "@/assets/isa-person (2).jpeg";
-import serviceHome from "@/assets/isa-person (3).jpeg";
-import serviceWorkplace from "@/assets/isa-person (4).jpeg";
-import serviceRetail from "@/assets/isa-person (5).jpeg";
-import serviceOccasion from "@/assets/isa-person (6).jpeg";
+import soundbath from "@/assets/soundbath.jpg";
+import serviceHome from "@/assets/service-home.jpg";
+import serviceWorkplace from "@/assets/service-workplace.jpg";
+import serviceRetail from "@/assets/service-retail.jpg";
+import serviceOccasion from "@/assets/service-occasion.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/services")({

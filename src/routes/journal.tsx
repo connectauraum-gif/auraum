@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import ripples from "@/assets/isa-person (1).jpeg";
-import gong from "@/assets/isa-person (2).jpeg";
-import ritual from "@/assets/isa-person (3).jpeg";
-import shadows from "@/assets/isa-person (4).jpeg";
+import ripples from "@/assets/ripples.jpg";
+import gong from "@/assets/gong.jpg";
+import ritual from "@/assets/ritual.jpg";
+import shadows from "@/assets/shadows.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/journal")({

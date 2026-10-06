@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import hero from "@/assets/isa-person (1).jpeg";
-import ripples from "@/assets/isa-person (2).jpeg";
-import soundbath from "@/assets/isa-person (3).jpeg";
-import meditation from "@/assets/isa-person (4).jpeg";
+import ripples from "@/assets/ripples.jpg";
+import soundbath from "@/assets/soundbath.jpg";
+import meditation from "@/assets/isa-person MAIN 1.jpeg";
 import chakra from "@/assets/chakra.jpg";
 import shadows from "@/assets/shadows.jpg";
-import vortex from "@/assets/isa-person (5).jpeg";
+import vortex from "@/assets/vortex.jpg";
 import { Reveal, useInView } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
@@ -227,11 +227,11 @@ function QuoteBand() {
         <Reveal delay={150} className="overflow-hidden">
           <img
             src={meditation}
-            alt="Woman meditating in a warm stone room at dusk"
+            alt="Isa Barao, founder and spatial sound practitioner"
             loading="lazy"
             width={1024}
             height={1280}
-            className="h-72 w-full object-cover transition-transform duration-[1400ms] hover:scale-105 md:h-[26rem]"
+            className="h-72 w-full object-cover transition-transform duration-[1400ms] hover:scale-105 md:h-[26rem] object-top"
           />
         </Reveal>
 

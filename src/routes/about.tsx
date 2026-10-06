@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import ritual from "@/assets/isa-person (6).jpeg";
-import shadows from "@/assets/isa-person (7).jpeg";
-import chakra from "@/assets/isa-person (8).jpeg";
+import ritual from "@/assets/isa-person MAIN 2.jpeg";
+import shadows from "@/assets/shadows.jpg";
+import chakra from "@/assets/chakra.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/about")({
@@ -110,7 +110,7 @@ function AboutPage() {
           <Reveal delay={160} className="overflow-hidden">
             <img
               src={chakra}
-              alt="Isa Barao, founder of Auraum"
+              alt="Abstract space clearing elements"
               loading="lazy"
               width={1024}
               height={1024}
@@ -150,11 +150,11 @@ function AboutPage() {
             <Reveal delay={120} className="overflow-hidden">
               <img
                 src={ritual}
-                alt="Incense bowl and olive plant on a stone ledge"
+                alt="Isa Barao, founder of Auraum"
                 loading="lazy"
                 width={1024}
                 height={768}
-                className="h-80 w-full object-cover transition-transform duration-[1400ms] hover:scale-105 md:h-[34rem]"
+                className="h-80 w-full object-cover transition-transform duration-[1400ms] hover:scale-105 md:h-[34rem] object-top"
               />
             </Reveal>
 
