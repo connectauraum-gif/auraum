@@ -1,1 +1,0 @@
-var e=`/assets/isa-person%20(5)-DJ1vbRJD.jpeg`;export{e as t};

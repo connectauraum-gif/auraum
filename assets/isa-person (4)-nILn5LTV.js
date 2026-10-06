@@ -1,1 +1,0 @@
-var e=`/assets/isa-person%20(2)-BoC3v3-2.jpeg`,t=`/assets/isa-person%20(3)-h3X1tVnJ.jpeg`,n=`/assets/isa-person%20(4)-CONU0oe2.jpeg`;export{t as n,e as r,n as t};
