@@ -25,13 +25,27 @@ export function Preloader() {
     const interval = 20;
     const step = (100 / duration) * interval;
     
+    let audioAllowed = false;
+    if (audioRef.current) {
+      audioRef.current.volume = 0.35;
+      audioRef.current.play().then(() => {
+        audioAllowed = true;
+      }).catch(() => {
+        audioAllowed = false;
+      });
+    }
+
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(() => {
-            setEntered(true);
-          }, 300);
+          // If audio played successfully, enter automatically.
+          // Otherwise wait for user interaction to play the audio.
+          if (audioAllowed) {
+            setTimeout(() => {
+              setEntered(true);
+            }, 300);
+          }
           return 100;
         }
         return prev + step;
@@ -40,6 +54,18 @@ export function Preloader() {
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleEnter = async () => {
+    if (audioRef.current) {
+      try {
+        audioRef.current.volume = 0.35;
+        await audioRef.current.play();
+      } catch (e) {
+        console.log("Audio still blocked", e);
+      }
+    }
+    setEntered(true);
+  };
 
   return (
     <>
@@ -65,14 +91,28 @@ export function Preloader() {
             <span className="sr-only">AURAUM</span>
           </div>
 
-          <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden mt-8">
-            <div 
-              className="h-full bg-gold transition-all duration-75 ease-linear"
-              style={{ width: `${progress}%` }}
-            />
+          <div className={`w-full transition-opacity duration-500 ${progress >= 100 ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100 mt-8'}`}>
+            <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gold transition-all duration-75 ease-linear"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="mt-4 text-xs tracking-[3px] text-white/50 uppercase">
+              Loading Space...
+            </div>
           </div>
-          <div className="mt-4 text-xs tracking-[3px] text-white/50 uppercase">
-            {progress < 100 ? "Loading Space..." : "Entering Space"}
+
+          <div className={`transition-all duration-700 ${progress >= 100 ? 'opacity-100 translate-y-0 mt-8' : 'opacity-0 translate-y-4 pointer-events-none absolute'}`}>
+            <button
+              onClick={handleEnter}
+              className="cursor-pointer rounded-full border border-white/50 bg-transparent px-9 py-3.5 text-xs tracking-[2px] text-white outline-none transition-all duration-300 hover:bg-white hover:text-[#0b0b0b] sm:text-sm"
+            >
+              ENTER EXPERIENCE
+            </button>
+            <div className="mt-4 text-[0.6rem] uppercase tracking-[2px] text-white/40">
+              Interaction required for sound
+            </div>
           </div>
         </div>
       </div>
