@@ -43,13 +43,16 @@ export function SiteHeader() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-10">
           <Link to="/" className="flex min-w-0 items-center gap-3">
             <img
-              src="/favicon.png"
+              src="/logo.png"
               alt="AURAUM"
-              width={28}
-              height={28}
-              className="h-7 w-7 shrink-0 animate-spin-slow"
+              className="h-10 w-auto object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.nextElementSibling?.classList.remove('sr-only');
+                e.currentTarget.nextElementSibling?.classList.add('font-display', 'truncate', 'text-lg', 'tracking-brand');
+              }}
             />
-            <span className="font-display truncate text-lg tracking-brand">AURAUM</span>
+            <span className="sr-only font-display truncate text-lg tracking-brand">AURAUM</span>
           </Link>
 
           <nav className="hidden items-center gap-9 md:flex">

@@ -10,14 +10,16 @@ export function SiteFooter() {
           <div>
             <div className="flex items-center gap-3">
               <img
-                src="./favicon.png"
+                src="/logo.png"
                 alt="AURAUM"
                 loading="lazy"
-                width={28}
-                height={28}
-                className="h-7 w-7"
+                className="h-10 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('sr-only');
+                }}
               />
-              <span className="font-display text-lg tracking-brand">AURAUM</span>
+              <span className="sr-only font-display text-lg tracking-brand">AURAUM</span>
             </div>
             <p className="mt-5 max-w-sm font-display text-2xl leading-snug text-foreground/80">
               A quieter space. A fuller life.
