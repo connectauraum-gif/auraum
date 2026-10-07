@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import hero from "@/assets/isa-person (1).jpeg";
+import hero from "@/assets/hero.jpg";
 import ripples from "@/assets/ripples.jpg";
 import soundbath from "@/assets/soundbath.jpg";
-import meditation from "@/assets/isa-person MAIN 1.jpeg";
+import meditation from "@/assets/isa main page.jpeg";
+import cert1 from "@/assets/isa certification 1.jpeg";
+import cert2 from "@/assets/isa certification 2.jpeg";
 import chakra from "@/assets/chakra.jpg";
 import shadows from "@/assets/shadows.jpg";
 import vortex from "@/assets/vortex.jpg";
@@ -38,6 +40,7 @@ function Index() {
       <Manifesto />
       <ShadowBand />
       <QuoteBand />
+      <CertificationBand />
       <Closing />
     </>
   );
@@ -216,15 +219,15 @@ function ShadowBand() {
 function QuoteBand() {
   return (
     <section className="grain bg-sand px-5 py-20 text-sand-foreground md:px-10 md:py-28">
-      <div className="mx-auto grid max-w-[1400px] items-center gap-12 md:grid-cols-[1fr_1.1fr_1fr]">
-        <Reveal>
-          <blockquote className="font-display text-3xl italic leading-snug sm:text-4xl">
+      <div className="mx-auto grid max-w-[1400px] items-center gap-y-16 gap-x-12 md:grid-cols-[1fr_1.1fr_1fr]">
+        <Reveal className="relative z-10">
+          <blockquote className="font-display text-2xl italic leading-relaxed sm:text-3xl lg:text-4xl">
             Sound is the bridge between what is seen and what is felt
           </blockquote>
           <p className="mt-5 text-[0.55rem] uppercase tracking-brand opacity-70">— Isa, Auraum</p>
         </Reveal>
 
-        <Reveal delay={150} className="overflow-hidden">
+        <Reveal delay={150} className="relative z-0 overflow-hidden">
           <img
             src={meditation}
             alt="Isa Barao, founder and spatial sound practitioner"
@@ -248,6 +251,40 @@ function QuoteBand() {
             Our approach
           </Link>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function CertificationBand() {
+  return (
+    <section className="grain bg-background px-5 py-20 md:px-10 md:py-28">
+      <div className="mx-auto max-w-[1400px]">
+        <Reveal>
+          <h2 className="font-display text-3xl tracking-brand sm:text-4xl mb-12 text-center text-gold">CERTIFICATIONS</h2>
+        </Reveal>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+          <Reveal delay={100} className="overflow-hidden">
+            <img
+              src={cert1}
+              alt="Isa Certification 1"
+              loading="lazy"
+              width={1024}
+              height={1024}
+              className="w-full object-cover transition-transform duration-[1400ms] hover:scale-105"
+            />
+          </Reveal>
+          <Reveal delay={200} className="overflow-hidden">
+            <img
+              src={cert2}
+              alt="Isa Certification 2"
+              loading="lazy"
+              width={1024}
+              height={1024}
+              className="w-full object-cover transition-transform duration-[1400ms] hover:scale-105"
+            />
+          </Reveal>
+        </div>
       </div>
     </section>
   );
