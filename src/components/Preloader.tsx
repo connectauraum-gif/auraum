@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 
 export function Preloader() {
   const [entered, setEntered] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -16,36 +18,25 @@ export function Preloader() {
     // Attempt playback on load if allowed by browser policy
     if (audioRef.current) {
       audioRef.current.volume = 0.35;
-      audioRef.current.play().catch(() => {
-        // Autoplay may be blocked by the browser until user interaction
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        setIsPlaying(false);
+        // Autoplay blocked by the browser until user interaction
       });
     }
 
     const duration = 2000; // 2 seconds loading
     const interval = 20;
     const step = (100 / duration) * interval;
-    
-    let audioAllowed = false;
-    if (audioRef.current) {
-      audioRef.current.volume = 0.35;
-      audioRef.current.play().then(() => {
-        audioAllowed = true;
-      }).catch(() => {
-        audioAllowed = false;
-      });
-    }
 
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          // If audio played successfully, enter automatically.
-          // Otherwise wait for user interaction to play the audio.
-          if (audioAllowed) {
-            setTimeout(() => {
-              setEntered(true);
-            }, 300);
-          }
+          setTimeout(() => {
+            setEntered(true);
+          }, 300);
           return 100;
         }
         return prev + step;
@@ -55,16 +46,20 @@ export function Preloader() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleEnter = async () => {
+  const toggleSound = () => {
     if (audioRef.current) {
-      try {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
         audioRef.current.volume = 0.35;
-        await audioRef.current.play();
-      } catch (e) {
-        console.log("Audio still blocked", e);
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch((e) => {
+          console.log("Audio play failed:", e);
+        });
       }
     }
-    setEntered(true);
   };
 
   return (
@@ -98,24 +93,18 @@ export function Preloader() {
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <div className="mt-4 text-xs tracking-[3px] text-white/50 uppercase">
-              Loading Space...
-            </div>
-          </div>
-
-          <div className={`transition-all duration-700 ${progress >= 100 ? 'opacity-100 translate-y-0 mt-8' : 'opacity-0 translate-y-4 pointer-events-none absolute'}`}>
-            <button
-              onClick={handleEnter}
-              className="cursor-pointer rounded-full border border-white/50 bg-transparent px-9 py-3.5 text-xs tracking-[2px] text-white outline-none transition-all duration-300 hover:bg-white hover:text-[#0b0b0b] sm:text-sm"
-            >
-              ENTER EXPERIENCE
-            </button>
-            <div className="mt-4 text-[0.6rem] uppercase tracking-[2px] text-white/40">
-              Interaction required for sound
-            </div>
           </div>
         </div>
       </div>
+
+      {/* FLOATING SOUND TOGGLE */}
+      <button
+        onClick={toggleSound}
+        className="fixed bottom-6 right-6 z-[9998] flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-background/50 backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/40 text-foreground/80 hover:text-foreground"
+        aria-label={isPlaying ? "Mute sound" : "Play sound"}
+      >
+        {isPlaying ? <Volume2 size={18} strokeWidth={1.5} /> : <VolumeX size={18} strokeWidth={1.5} />}
+      </button>
 
       {/* HEALING SOUND - Plays once at the start, does not replay */}
       <audio ref={audioRef} id="healingSound" preload="auto">
