@@ -5,12 +5,12 @@ import ripples from "@/assets/ripples.jpg";
 import soundbath from "@/assets/soundbath.jpg";
 import meditation from "@/assets/isa main page.jpeg";
 import cert1 from "@/assets/isa certification 1.jpeg";
-import cert2 from "@/assets/isa certification 2.jpeg";
 import chakra from "@/assets/chakra.jpg";
 import shadows from "@/assets/shadows.jpg";
 import vortex from "@/assets/vortex.jpg";
 import { Reveal, useInView } from "@/components/Reveal";
 import serviceHome from "@/assets/service-home.jpg"
+import ritual from "@/assets/ritual.jpg"
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -173,7 +173,7 @@ function Manifesto() {
 
       <div className="relative h-56 overflow-hidden md:h-[34rem]">
         <img
-          src={serviceHome}
+          src={ritual}
           alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
           width={1280}
@@ -259,33 +259,65 @@ function QuoteBand() {
 
 function CertificationBand() {
   return (
-    <section className="grain bg-background px-5 py-20 md:px-10 md:py-28">
-      <div className="mx-auto max-w-[1400px]">
+    <section className="grain relative overflow-hidden bg-background px-5 py-24 md:px-10 md:py-32">
+      {/* Ambient gold glow */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-[120px]" />
+
+      <div className="relative mx-auto max-w-[1400px]">
         <Reveal>
-          <h2 className="font-display text-3xl tracking-brand sm:text-4xl mb-12 text-center text-gold">CERTIFICATIONS</h2>
+          <div className="mb-14 text-center">
+            <span className="mb-4 block text-xs tracking-[0.35em] text-gold/70">
+              RECOGNITION & EXCELLENCE
+            </span>
+
+            <h2 className="font-display text-3xl tracking-brand text-gold sm:text-4xl md:text-5xl">
+              CERTIFICATIONS
+            </h2>
+
+            <div className="mx-auto mt-6 flex items-center justify-center gap-4">
+              <span className="h-px w-12 bg-gold/40" />
+              <span className="h-1.5 w-1.5 rotate-45 bg-gold" />
+              <span className="h-px w-12 bg-gold/40" />
+            </div>
+          </div>
         </Reveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-          {/* <Reveal delay={100} className="overflow-hidden">
-            <img
-              src={cert1}
-              alt="Isa Certification 1"
-              loading="lazy"
-              width={1024}
-              height={1024}
-              className="w-full object-cover transition-transform duration-[1400ms] hover:scale-105"
-            />
-          </Reveal> */}
-          <Reveal delay={200} className="overflow-hidden">
-            <img
-              src={cert2}
-              alt="Isa Certification 2"
-              loading="lazy"
-              width={1024}
-              height={1024}
-              className="w-full object-cover transition-transform duration-[1400ms] hover:scale-105"
-            />
-          </Reveal>
-        </div>
+
+        <Reveal delay={200}>
+          <div className="flex justify-center">
+            <div className="group relative">
+              {/* Outer decorative frame */}
+              <div className="absolute -inset-3 border border-gold/20 transition-all duration-700 group-hover:-inset-4 group-hover:border-gold/40" />
+
+              {/* Corner accents */}
+              <div className="absolute -left-4 -top-4 h-10 w-10 border-l border-t border-gold" />
+              <div className="absolute -right-4 -top-4 h-10 w-10 border-r border-t border-gold" />
+              <div className="absolute -bottom-4 -left-4 h-10 w-10 border-b border-l border-gold" />
+              <div className="absolute -bottom-4 -right-4 h-10 w-10 border-b border-r border-gold" />
+
+              {/* Image */}
+              <div className="relative overflow-hidden bg-black/20">
+                <img
+                  src={cert1}
+                  alt="Isa Certification"
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  className="h-auto w-[min(80vw,520px)] object-contain transition-transform duration-[1400ms] ease-out group-hover:scale-[1.03]"
+                />
+
+                {/* Subtle overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/5" />
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={350}>
+          <p className="mx-auto mt-12 max-w-xl text-center text-sm leading-7 tracking-wide text-muted-foreground">
+            Recognized for excellence, professionalism, and an unwavering
+            commitment to quality.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

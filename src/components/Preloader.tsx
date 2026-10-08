@@ -13,6 +13,7 @@ export function Preloader() {
   }, [entered]);
 
   const audioPlayed = useRef(false);
+  const [audioLoaded, setAudioLoaded] = useState(false);
 
   useEffect(() => {
     const playAudio = async () => {
@@ -45,6 +46,36 @@ export function Preloader() {
   }, []);
 
   useEffect(() => {
+    let fallbackTimer: NodeJS.Timeout;
+
+    if (audioRef.current) {
+      const handleCanPlayThrough = () => {
+        setAudioLoaded(true);
+      };
+
+      // readyState >= 3 means HAVE_FUTURE_DATA or HAVE_ENOUGH_DATA
+      if (audioRef.current.readyState >= 3) {
+        setAudioLoaded(true);
+      } else {
+        audioRef.current.addEventListener("canplaythrough", handleCanPlayThrough);
+        // Fallback: start preloader anyway after 3 seconds if audio is slow
+        fallbackTimer = setTimeout(() => {
+          setAudioLoaded(true);
+        }, 3000);
+
+        return () => {
+          audioRef.current?.removeEventListener("canplaythrough", handleCanPlayThrough);
+          clearTimeout(fallbackTimer);
+        };
+      }
+    } else {
+      setAudioLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!audioLoaded) return;
+
     const duration = 2000; // 2 seconds loading
     const interval = 20;
     const step = (100 / duration) * interval;
@@ -63,7 +94,7 @@ export function Preloader() {
     }, interval);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [audioLoaded]);
 
 
 
