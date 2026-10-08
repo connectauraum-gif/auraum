@@ -1,0 +1,1 @@
+var e=`/assets/service-home-B_n1nB_v.jpg`;export{e as t};
