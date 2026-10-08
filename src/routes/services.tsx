@@ -7,6 +7,8 @@ import serviceWorkplace from "@/assets/service-workplace.jpg";
 import serviceRetail from "@/assets/service-retail.jpg";
 import serviceOccasion from "@/assets/service-occasion.jpg";
 import { Reveal } from "@/components/Reveal";
+import ritual from "@/assets/ritual.jpg";
+
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -166,7 +168,7 @@ function ServicesPage() {
     <>
       <section className="grain relative flex min-h-[60vh] items-end overflow-hidden">
         <img
-          src={soundbath}
+          src={ritual}
           alt="Crystal singing bowls glowing in candlelight"
           width={1280}
           height={960}
@@ -252,9 +254,8 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
       className="scroll-mt-24 border-t border-border px-5 py-16 md:px-10 md:py-24"
     >
       <div
-        className={`mx-auto grid max-w-[1400px] items-start gap-10 md:grid-cols-2 md:gap-16 ${
-          flip ? "md:[&>*:first-child]:order-2" : ""
-        }`}
+        className={`mx-auto grid max-w-[1400px] items-start gap-10 md:grid-cols-2 md:gap-16 ${flip ? "md:[&>*:first-child]:order-2" : ""
+          }`}
       >
         <Reveal className="overflow-hidden">
           <img
@@ -309,9 +310,8 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
                 </span>
               </button>
               <div
-                className={`grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                }`}
+                className={`grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
               >
                 <ul className="overflow-hidden">
                   <li className="h-5" aria-hidden />

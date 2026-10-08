@@ -10,6 +10,7 @@ import chakra from "@/assets/chakra.jpg";
 import shadows from "@/assets/shadows.jpg";
 import vortex from "@/assets/vortex.jpg";
 import { Reveal, useInView } from "@/components/Reveal";
+import serviceHome from "@/assets/service-home.jpg"
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -172,7 +173,7 @@ function Manifesto() {
 
       <div className="relative h-56 overflow-hidden md:h-[34rem]">
         <img
-          src={soundbath}
+          src={serviceHome}
           alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
           width={1280}
@@ -264,7 +265,7 @@ function CertificationBand() {
           <h2 className="font-display text-3xl tracking-brand sm:text-4xl mb-12 text-center text-gold">CERTIFICATIONS</h2>
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-          <Reveal delay={100} className="overflow-hidden">
+          {/* <Reveal delay={100} className="overflow-hidden">
             <img
               src={cert1}
               alt="Isa Certification 1"
@@ -273,7 +274,7 @@ function CertificationBand() {
               height={1024}
               className="w-full object-cover transition-transform duration-[1400ms] hover:scale-105"
             />
-          </Reveal>
+          </Reveal> */}
           <Reveal delay={200} className="overflow-hidden">
             <img
               src={cert2}

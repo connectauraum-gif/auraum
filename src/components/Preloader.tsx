@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Volume2, VolumeX } from "lucide-react";
 
 export function Preloader() {
   const [entered, setEntered] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -14,17 +12,37 @@ export function Preloader() {
     };
   }, [entered]);
 
+  const audioPlayed = useRef(false);
+
   useEffect(() => {
-    // Attempt playback on load if allowed by browser policy
-    if (audioRef.current) {
-      audioRef.current.volume = 0.35;
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {
-        setIsPlaying(false);
-        // Autoplay blocked by the browser until user interaction
-      });
-    }
+    const playAudio = async () => {
+      if (audioRef.current && !audioPlayed.current) {
+        try {
+          audioRef.current.volume = 0.35;
+          await audioRef.current.play();
+          audioPlayed.current = true;
+          document.removeEventListener("click", playAudio);
+          document.removeEventListener("touchstart", playAudio);
+          document.removeEventListener("scroll", playAudio);
+        } catch (error) {
+          // Autoplay blocked until interaction
+        }
+      }
+    };
+
+    document.addEventListener("click", playAudio);
+    document.addEventListener("touchstart", playAudio);
+    document.addEventListener("scroll", playAudio, { passive: true });
+
+    // Attempt immediately
+    playAudio();
+
+    return () => {
+      document.removeEventListener("click", playAudio);
+      document.removeEventListener("touchstart", playAudio);
+      document.removeEventListener("scroll", playAudio);
+    };
+  }, []);
 
     const duration = 2000; // 2 seconds loading
     const interval = 20;
@@ -46,21 +64,7 @@ export function Preloader() {
     return () => clearInterval(timer);
   }, []);
 
-  const toggleSound = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        audioRef.current.volume = 0.35;
-        audioRef.current.play().then(() => {
-          setIsPlaying(true);
-        }).catch((e) => {
-          console.log("Audio play failed:", e);
-        });
-      }
-    }
-  };
+
 
   return (
     <>
@@ -96,15 +100,6 @@ export function Preloader() {
           </div>
         </div>
       </div>
-
-      {/* FLOATING SOUND TOGGLE */}
-      <button
-        onClick={toggleSound}
-        className="fixed bottom-6 right-6 z-[9998] flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-background/50 backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/40 text-foreground/80 hover:text-foreground"
-        aria-label={isPlaying ? "Mute sound" : "Play sound"}
-      >
-        {isPlaying ? <Volume2 size={18} strokeWidth={1.5} /> : <VolumeX size={18} strokeWidth={1.5} />}
-      </button>
 
       {/* HEALING SOUND - Plays once at the start, does not replay */}
       <audio ref={audioRef} id="healingSound" preload="auto">
