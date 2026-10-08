@@ -44,6 +44,7 @@ export function Preloader() {
     };
   }, []);
 
+  useEffect(() => {
     const duration = 2000; // 2 seconds loading
     const interval = 20;
     const step = (100 / duration) * interval;
