@@ -8,6 +8,9 @@ import serviceRetail from "@/assets/service-retail.jpg";
 import serviceOccasion from "@/assets/service-occasion.jpg";
 import { Reveal } from "@/components/Reveal";
 import ritual from "@/assets/ritual.jpg";
+import serviceIsa1 from "@/assets/isa service 1.jpeg"
+import serviceIsa2 from "@/assets/isa service 2.jpeg"
+import serviceBanner from "@/assets/isa service banner.jpeg"
 
 
 export const Route = createFileRoute("/services")({
@@ -68,7 +71,7 @@ const services: Service[] = [
     ],
     buttonText: "Enquire about a home session",
     bookServiceKey: "home",
-    img: serviceHome,
+    img: serviceIsa1,
     alt: "Tibetan singing bowls arranged in a sunlit home interior with natural wood and linen",
     width: 720,
     height: 894,
@@ -89,7 +92,7 @@ const services: Service[] = [
     ],
     buttonText: "Enquire about a hospitality session",
     bookServiceKey: "hospitality",
-    img: aura,
+    img: serviceIsa2,
     alt: "Soft golden light waves drifting through mist",
     width: 1024,
     height: 900,
@@ -168,7 +171,7 @@ function ServicesPage() {
     <>
       <section className="grain relative flex min-h-[60vh] items-end overflow-hidden">
         <img
-          src={ritual}
+          src={serviceBanner}
           alt="Crystal singing bowls glowing in candlelight"
           width={1280}
           height={960}
