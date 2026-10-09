@@ -10,6 +10,7 @@ import shadows from "@/assets/shadows.jpg";
 import vortex from "@/assets/vortex.jpg";
 import { Reveal, useInView } from "@/components/Reveal";
 import serviceHome from "@/assets/service-home.jpg"
+import home2 from "@/assets/home-2.jpeg"
 import ritual from "@/assets/ritual.jpg"
 
 export const Route = createFileRoute("/")({
@@ -173,7 +174,7 @@ function Manifesto() {
 
       <div className="relative h-56 overflow-hidden md:h-[34rem]">
         <img
-          src={ritual}
+          src={home2}
           alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
           width={1280}

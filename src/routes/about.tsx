@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import ritual from "@/assets/isa-person MAIN 2.jpeg";
-import shadows from "@/assets/shadows.jpg";
+import ritual from "@/assets/isa-person MAIN 4.jpeg";
+import shadows from "@/assets/aboutbanner.jpg";
 import chakra from "@/assets/chakra.jpg";
 import { Reveal } from "@/components/Reveal";
 
