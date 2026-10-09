@@ -10,7 +10,7 @@ import shadows from "@/assets/shadows.jpg";
 import vortex from "@/assets/vortex.jpg";
 import { Reveal, useInView } from "@/components/Reveal";
 import serviceHome from "@/assets/service-home.jpg"
-import home2 from "@/assets/home-2.jpeg"
+import home2 from "@/assets/home2.jpeg"
 import ritual from "@/assets/ritual.jpg"
 
 export const Route = createFileRoute("/")({
