@@ -51,7 +51,7 @@ function AboutPage() {
         <img
           src={shadows}
           alt="Olive branch shadows on a warm plaster wall"
-          className="animate-drift absolute inset-0 h-full w-full object-fill"
+          className="animate-drift absolute inset-0 h-full w-full object-cover"
         />
         <div className="veil absolute inset-0" />
         <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
@@ -105,12 +105,12 @@ function AboutPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={160} className="h-72 w-full overflow-hidden md:h-[34rem]">
+          <Reveal delay={160} className="h-auto w-full overflow-hidden">
             <img
               src={chakra}
               alt="Abstract space clearing elements"
               loading="lazy"
-              className="h-full w-full object-fill transition-transform duration-[1400ms]"
+              className="block h-auto w-full transition-transform duration-[1400ms]"
             />
           </Reveal>
         </div>
@@ -143,12 +143,12 @@ function AboutPage() {
           </Reveal>
 
           <div className="mt-12 grid gap-12 md:grid-cols-2 md:items-start">
-            <Reveal delay={120} className="h-80 w-full overflow-hidden md:h-[34rem]">
+            <Reveal delay={120} className="h-auto w-full overflow-hidden">
               <img
                 src={ritual}
                 alt="Isa Barao, founder of Auraum"
                 loading="lazy"
-                className="h-full w-full object-fill transition-transform duration-[1400ms]"
+                className="block h-auto w-full transition-transform duration-[1400ms]"
               />
             </Reveal>
 

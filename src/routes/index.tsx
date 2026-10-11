@@ -83,7 +83,7 @@ function Hero() {
         src={hero}
         alt="Stone terrace with a brass singing bowl overlooking the sea at sunset"
         style={{ transform: `translate3d(0, ${offset}px, 0)` }}
-        className="absolute inset-0 h-full w-full object-fill will-change-transform"
+        className="absolute inset-0 h-full w-full object-cover will-change-transform"
       />
       <div className="absolute inset-0 bg-ink/45" />
       <div className="veil absolute inset-0" />
@@ -140,12 +140,12 @@ function Manifesto() {
   const { ref, visible } = useInView<HTMLDivElement>(0.2);
   return (
     <section ref={ref} className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr_1fr]">
-      <div className="relative h-56 w-full overflow-hidden md:h-[34rem]">
+      <div className="relative h-auto w-full overflow-hidden">
         <img
           src={ripples}
           alt="Golden water ripples"
           loading="lazy"
-          className="h-full w-full object-fill transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="block h-auto w-full transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
         />
       </div>
 
@@ -167,12 +167,12 @@ function Manifesto() {
         </Reveal>
       </div>
 
-      <div className="relative h-56 w-full overflow-hidden md:h-[34rem]">
+      <div className="relative h-auto w-full overflow-hidden">
         <img
           src={home2}
           alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
-          className="h-full w-full object-fill transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="block h-auto w-full transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
         />
       </div>
     </section>
@@ -186,14 +186,14 @@ function ShadowBand() {
         src={shadows}
         alt="Olive branch shadows on warm plaster"
         loading="lazy"
-        className="animate-drift absolute inset-0 h-full w-full object-fill"
+        className="animate-drift absolute inset-0 h-full w-full object-cover"
       />
       <img
         src={chakra}
         alt=""
         aria-hidden="true"
         loading="lazy"
-        className="animate-spin-slow pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 object-fill opacity-25 mix-blend-screen md:h-[40rem] md:w-[40rem]"
+        className="animate-spin-slow pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 object-contain opacity-25 mix-blend-screen md:h-[40rem] md:w-[40rem]"
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <Reveal>
@@ -217,12 +217,12 @@ function QuoteBand() {
           <p className="mt-5 text-[0.55rem] uppercase tracking-brand opacity-70">— Isa, Auraum</p>
         </Reveal>
 
-        <Reveal delay={150} className="relative z-0 h-72 w-full overflow-hidden md:h-[26rem]">
+        <Reveal delay={150} className="relative z-0 h-auto w-full overflow-hidden">
           <img
             src={meditation}
             alt="Isa Barao, founder and spatial sound practitioner"
             loading="lazy"
-            className="h-full w-full object-fill transition-transform duration-[1400ms]"
+            className="block h-auto w-full transition-transform duration-[1400ms]"
           />
         </Reveal>
 
@@ -282,12 +282,12 @@ function CertificationBand() {
               <div className="absolute -bottom-4 -right-4 h-10 w-10 border-b border-r border-gold" />
 
               {/* Image */}
-              <div className="relative h-[min(80vw,520px)] w-[min(80vw,520px)] overflow-hidden bg-black/20">
+              <div className="relative h-auto w-[min(80vw,520px)] overflow-hidden bg-black/20">
                 <img
                   src={cert1}
                   alt="Isa Certification"
                   loading="lazy"
-                  className="h-full w-full object-fill transition-transform duration-[1400ms] ease-out"
+                  className="block h-auto w-full transition-transform duration-[1400ms] ease-out"
                 />
 
                 {/* Subtle overlay */}
@@ -315,7 +315,7 @@ function Closing() {
         src={vortex}
         alt="Golden water spiral at sunset"
         loading="lazy"
-        className="animate-drift absolute inset-0 h-full w-full object-fill"
+        className="animate-drift absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-ink/35" />
       <Reveal className="relative text-center">

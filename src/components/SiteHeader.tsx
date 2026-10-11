@@ -6,6 +6,7 @@ const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Us" },
   { to: "/services", label: "Services" },
+  { to: "/journal", label: "Journal" },
 ] as const;
 
 export function SiteHeader() {
@@ -48,7 +49,7 @@ export function SiteHeader() {
             : "border-b border-border/40 bg-background/70 backdrop-blur-md"
         }`}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-3.5 md:px-10">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 px-5 py-3.5 md:px-10">
           <Link to="/" className="flex min-w-0 items-center gap-3 group">
             <img
               src="/logo.png"
@@ -65,7 +66,7 @@ export function SiteHeader() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-6 md:gap-8">
+          <div className="flex items-center gap-2.5 sm:gap-6 md:gap-8">
             <nav className="hidden items-center gap-8 lg:gap-10 md:flex">
               {links.map((l) => (
                 <Link
@@ -82,29 +83,40 @@ export function SiteHeader() {
               </Link>
             </nav>
 
+            <Link
+              to="/book"
+              className="btn-ritual px-3 py-1.5 text-[0.6rem] md:hidden"
+            >
+              Book
+            </Link>
+
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="relative z-50 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border bg-background/50 hover:border-gold/50 hover:bg-background/80 transition-colors"
+              className="relative z-[60] flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1.5 hover:border-gold/50 hover:bg-background transition-colors"
             >
-              <span className="sr-only">Menu</span>
-              <span
-                className={`absolute h-px w-5 bg-foreground transition-all duration-500 ${
-                  open ? "rotate-45" : "-translate-y-1.5"
-                }`}
-              />
-              <span
-                className={`absolute h-px w-5 bg-foreground transition-all duration-500 ${
-                  open ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <span
-                className={`absolute h-px w-5 bg-foreground transition-all duration-500 ${
-                  open ? "-rotate-45" : "translate-y-1.5"
-                }`}
-              />
+              <span className="text-[0.65rem] font-medium uppercase tracking-brand text-foreground">
+                {open ? "Close" : "Menu"}
+              </span>
+              <div className="relative flex h-3 w-3.5 items-center justify-center">
+                <span
+                  className={`absolute h-[1.5px] w-3.5 bg-foreground transition-all duration-300 ${
+                    open ? "rotate-45" : "-translate-y-1"
+                  }`}
+                />
+                <span
+                  className={`absolute h-[1.5px] w-3.5 bg-foreground transition-all duration-300 ${
+                    open ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+                <span
+                  className={`absolute h-[1.5px] w-3.5 bg-foreground transition-all duration-300 ${
+                    open ? "-rotate-45" : "translate-y-1"
+                  }`}
+                />
+              </div>
             </button>
           </div>
         </div>
@@ -112,11 +124,11 @@ export function SiteHeader() {
 
       {/* Overlay menu */}
       <div
-        className={`fixed inset-0 z-40 grain bg-background/95 backdrop-blur-2xl transition-all duration-700 ${
+        className={`fixed inset-0 z-[55] grain bg-background/95 backdrop-blur-2xl transition-all duration-700 ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <div className="flex h-full flex-col justify-center px-8 md:px-20 max-w-[1400px] mx-auto">
+        <div className="flex h-full flex-col justify-center px-8 md:px-20 max-w-[1400px] mx-auto pt-16">
           <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
           <ul className="relative space-y-5 md:space-y-7">
             {[...links, { to: "/book", label: "Book a session" } as const].map((l, i) => (
@@ -130,15 +142,15 @@ export function SiteHeader() {
                 <Link
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className="font-display block text-4xl md:text-6xl text-foreground/90 transition-colors hover:text-gold"
+                  className="font-display block text-3xl sm:text-4xl md:text-6xl text-foreground/90 transition-colors hover:text-gold"
                 >
                   {l.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="gold-line relative mt-10 w-full max-w-md" />
-          <p className="relative mt-6 text-[0.6rem] md:text-xs uppercase tracking-brand text-muted-foreground">
+          <div className="gold-line relative mt-8 md:mt-10 w-full max-w-md" />
+          <p className="relative mt-5 text-[0.6rem] md:text-xs uppercase tracking-brand text-muted-foreground">
             Space clearing trough sound
           </p>
         </div>
