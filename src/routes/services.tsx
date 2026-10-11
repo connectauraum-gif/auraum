@@ -6,6 +6,7 @@ import serviceHome from "@/assets/service-home.jpg";
 import serviceWorkplace from "@/assets/service-workplace.jpg";
 import serviceRetail from "@/assets/service-retail.jpg";
 import serviceOccasion from "@/assets/service-occasion.jpg";
+import lastService from "@/assets/last service.jpg"
 import { Reveal } from "@/components/Reveal";
 import ritual from "@/assets/ritual.jpg";
 import serviceIsa1 from "@/assets/isa service 1.jpeg"
@@ -159,7 +160,7 @@ const services: Service[] = [
     ],
     buttonText: "Enquire about an occasion session",
     bookServiceKey: "occasion",
-    img: serviceOccasion,
+    img: lastService,
     alt: "Overhead view of an intentional sound session ceremony on a mandala cloth with singing bowls",
     width: 1024,
     height: 576,
