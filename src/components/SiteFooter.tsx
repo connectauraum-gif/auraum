@@ -53,11 +53,11 @@ export function SiteFooter() {
                   hello@auraum.in
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="tel:+919958882810" className="link-underline hover:text-gold">
                   +91 99588 82810
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a
                   href={`https://wa.me/919958882810?text=${encodeURIComponent(
