@@ -176,7 +176,7 @@ function ServicesPage() {
           alt="Crystal singing bowls glowing in candlelight"
           width={1280}
           height={960}
-          className="animate-drift absolute inset-0 h-full w-full object-cover opacity-70"
+          className="animate-drift absolute inset-0 h-full w-full object-contain opacity-70"
         />
         <div className="veil absolute inset-0" />
         <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-14 md:px-10 md:pb-20">
@@ -261,14 +261,14 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
         className={`mx-auto grid max-w-[1400px] items-start gap-10 md:grid-cols-2 md:gap-16 ${flip ? "md:[&>*:first-child]:order-2" : ""
           }`}
       >
-        <Reveal className="overflow-hidden">
+        <Reveal className="flex w-full items-center justify-center">
           <img
             src={service.img}
             alt={service.alt}
             loading="lazy"
             width={service.width || 1024}
             height={service.height || 900}
-            className="h-72 w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 md:h-[34rem]"
+            className="h-auto w-full object-contain transition-transform duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
           />
         </Reveal>
 

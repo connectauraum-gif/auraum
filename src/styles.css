@@ -105,6 +105,11 @@
     background: color-mix(in oklab, var(--gold) 45%, transparent);
     border-radius: 99px;
   }
+  img {
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* ---------- Utilities ---------- */
@@ -236,10 +241,10 @@
 @keyframes slow-drift {
   0%,
   100% {
-    transform: scale(1.08) translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: scale(1.16) translate3d(0, -1.6%, 0);
+    transform: translate3d(0, -1.2%, 0);
   }
 }
 

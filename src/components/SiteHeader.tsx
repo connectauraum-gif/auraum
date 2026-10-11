@@ -53,7 +53,7 @@ export function SiteHeader() {
             <img
               src="/logo.png"
               alt="AURAUM"
-              className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-10 w-auto object-contain transition-transform duration-300"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 const fallback = e.currentTarget.nextElementSibling;

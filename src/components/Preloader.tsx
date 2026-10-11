@@ -153,7 +153,7 @@ export function Preloader() {
               <img
                 src="/logo.png"
                 alt="AURAUM"
-                className="w-24 sm:w-28 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(230,195,140,0.35)] transition-transform duration-500 hover:scale-105"
+                className="w-24 sm:w-28 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(230,195,140,0.35)] transition-transform duration-500"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
                 }}

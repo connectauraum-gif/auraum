@@ -91,14 +91,14 @@ function JournalPage() {
           {visible.map((p, i) => (
             <Reveal key={p.t} delay={i * 100}>
               <article className="group cursor-pointer">
-                <div className="overflow-hidden">
+                <div className="flex w-full items-center justify-center">
                   <img
                     src={p.img}
                     alt={p.t}
                     loading="lazy"
                     width={1024}
                     height={640}
-                    className="h-64 w-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 sm:h-80"
+                    className="h-auto w-full object-contain transition-opacity duration-700"
                   />
                 </div>
                 <div className="mt-5 flex items-center gap-3 text-[0.6rem] uppercase tracking-brand text-muted-foreground">
