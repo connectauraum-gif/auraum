@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -115,17 +115,26 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Preloader />
-      <SiteHeader />
-      <main>
-        {/* Required: nested routes render here. */}
-        <Outlet />
-      </main>
-      <SiteFooter />
-      <WhatsAppButton />
+      <Preloader onComplete={() => setLoaded(true)} />
+      <div
+        className={`min-h-screen transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          loaded
+            ? "opacity-100 scale-100 blur-0"
+            : "opacity-0 scale-[0.98] blur-[2px] pointer-events-none select-none invisible"
+        }`}
+      >
+        <SiteHeader />
+        <main>
+          {/* Required: nested routes render here. */}
+          <Outlet />
+        </main>
+        <SiteFooter />
+        <WhatsAppButton />
+      </div>
     </QueryClientProvider>
   );
 }

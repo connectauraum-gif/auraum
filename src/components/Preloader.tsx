@@ -1,18 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 
-export function Preloader() {
-  const [entered, setEntered] = useState(false);
+interface PreloaderProps {
+  onComplete?: () => void;
+}
+
+export function Preloader({ onComplete }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
+  const [transitioning, setTransitioning] = useState(false);
+  const [done, setDone] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioPlayed = useRef(false);
 
   useEffect(() => {
-    document.body.style.overflow = entered ? "" : "hidden";
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [entered]);
+  }, []);
 
-  const audioPlayed = useRef(false);
+  useEffect(() => {
+    if (transitioning) {
+      document.body.style.overflow = "";
+    }
+  }, [transitioning]);
 
   useEffect(() => {
     const playAudio = async () => {
@@ -24,7 +34,7 @@ export function Preloader() {
           document.removeEventListener("click", playAudio);
           document.removeEventListener("touchstart", playAudio);
           document.removeEventListener("scroll", playAudio);
-        } catch (error) {
+        } catch {
           // Autoplay blocked until interaction
         }
       }
@@ -34,7 +44,6 @@ export function Preloader() {
     document.addEventListener("touchstart", playAudio);
     document.addEventListener("scroll", playAudio, { passive: true });
 
-    // Attempt immediately
     playAudio();
 
     return () => {
@@ -45,27 +54,35 @@ export function Preloader() {
   }, []);
 
   useEffect(() => {
-    const duration = 2000; // 2 seconds loading
-    const interval = 20;
-    const step = (100 / duration) * interval;
+    const DURATION = 3000; // Exactly 3 seconds
+    let animationFrameId: number;
+    const startTime = performance.now();
 
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(() => {
-            setEntered(true);
-          }, 300);
-          return 100;
-        }
-        return prev + step;
-      });
-    }, interval);
+    const update = (now: number) => {
+      const elapsed = now - startTime;
+      const currentProgress = Math.min(100, (elapsed / DURATION) * 100);
+      setProgress(currentProgress);
 
-    return () => clearInterval(timer);
-  }, []);
+      if (elapsed < DURATION) {
+        animationFrameId = requestAnimationFrame(update);
+      } else {
+        setProgress(100);
+        setTransitioning(true);
+        onComplete?.();
+        setTimeout(() => {
+          setDone(true);
+        }, 1000);
+      }
+    };
 
+    animationFrameId = requestAnimationFrame(update);
 
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [onComplete]);
+
+  if (done) return null;
 
   const ritualPhase =
     progress < 35
@@ -74,86 +91,70 @@ export function Preloader() {
       ? "CLEAR  •  BALANCE  •  HARMONISE"
       : "ENTERING THE SANCTUARY";
 
+  const circumference = 452.39; // 2 * Math.PI * 72
+
   return (
     <>
-      {/* INTRO SCREEN */}
       <div
         id="intro"
-        aria-hidden={entered}
-        className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-[1200ms] ease-out ${
-          entered
-            ? "pointer-events-none invisible opacity-0 scale-105"
-            : "pointer-events-auto visible opacity-100 scale-100"
+        aria-hidden={transitioning}
+        className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          transitioning
+            ? "pointer-events-none invisible opacity-0 scale-[1.04] blur-[4px]"
+            : "pointer-events-auto visible opacity-100 scale-100 blur-0"
         }`}
         style={{
-          background:
-            "radial-gradient(circle at center, rgba(198, 156, 109, 0.12) 0%, rgba(18, 16, 14, 0.98) 60%, #080808 100%)",
+          backgroundColor: "var(--background)",
+          backgroundImage:
+            "radial-gradient(circle at center, color-mix(in oklab, var(--gold) 6%, var(--background)) 0%, var(--background) 70%, color-mix(in oklab, var(--ink) 85%, var(--background)) 100%)",
         }}
       >
         {/* Ambient Breathing Gold Aura */}
-        <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/15 blur-3xl" />
+        <span className="animate-breathe pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
 
         <div className="relative z-10 flex flex-col items-center px-6 w-full max-w-md">
-          {/* Central Sacred Resonance Mandala */}
+          {/* Centered Circular Progress Around Logo */}
           <div className="relative flex items-center justify-center w-56 h-56 sm:w-64 sm:h-64 my-2">
-            {/* Concentric Expanding Acoustic Sound Wave Rings */}
-            <div
-              className="absolute inset-0 rounded-full border border-gold/40 animate-ring-expand pointer-events-none"
-              style={{ animationDelay: "0s" }}
-            />
-            <div
-              className="absolute inset-0 rounded-full border border-gold/30 animate-ring-expand pointer-events-none"
-              style={{ animationDelay: "1.1s" }}
-            />
-            <div
-              className="absolute inset-0 rounded-full border border-gold/20 animate-ring-expand pointer-events-none"
-              style={{ animationDelay: "2.2s" }}
-            />
-
-            {/* Rotating Sacred Geometry Outer Dashed Ring */}
-            <div className="absolute inset-4 rounded-full border border-dashed border-gold/30 animate-spin-slow pointer-events-none" />
-
-            {/* Counter-rotating Inner Orbital Ring */}
-            <div className="absolute inset-8 rounded-full border border-gold/20 animate-spin-reverse pointer-events-none">
-              <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-gold shadow-[0_0_8px_rgba(230,195,140,0.9)]" />
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-gold/60" />
-            </div>
+            {/* Subtle Outer Dash Guide Ring */}
+            <div className="absolute inset-2 rounded-full border border-dashed border-gold/20 animate-spin-slow pointer-events-none" />
 
             {/* SVG Circular Progress Tracing Ring */}
             <svg
-              className="absolute inset-6 w-[calc(100%-3rem)] h-[calc(100%-3rem)] -rotate-90 pointer-events-none"
-              viewBox="0 0 100 100"
+              className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
+              viewBox="0 0 160 160"
             >
+              {/* Background circular track */}
               <circle
-                cx="50"
-                cy="50"
-                r="44"
+                cx="80"
+                cy="80"
+                r="72"
                 className="stroke-gold/15"
                 strokeWidth="1.5"
                 fill="none"
               />
+              {/* Active gold progress stroke */}
               <circle
-                cx="50"
-                cy="50"
-                r="44"
-                className="stroke-gold transition-all duration-150 ease-linear"
-                strokeWidth="2"
-                strokeDasharray={276.46}
-                strokeDashoffset={276.46 - (276.46 * progress) / 100}
+                cx="80"
+                cy="80"
+                r="72"
+                className="stroke-gold"
+                strokeWidth="2.5"
+                strokeDasharray={circumference}
+                strokeDashoffset={circumference - (circumference * progress) / 100}
                 strokeLinecap="round"
                 fill="none"
                 style={{
-                  filter: "drop-shadow(0 0 4px rgba(230, 195, 140, 0.6))",
+                  filter: "drop-shadow(0 0 6px rgba(230, 195, 140, 0.6))",
                 }}
               />
             </svg>
 
-            {/* Central Singing Bowl / AURAUM Emblem */}
-            <div className="relative z-10 flex flex-col items-center justify-center p-6 transition-transform duration-700">
+            {/* Center Logo */}
+            <div className="relative z-10 flex flex-col items-center justify-center p-4">
               <img
                 src="/logo.png"
                 alt="AURAUM"
-                className="w-24 sm:w-28 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(230,195,140,0.35)] transition-transform duration-500"
+                className="w-24 sm:w-28 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(230,195,140,0.35)]"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
                 }}
@@ -171,33 +172,19 @@ export function Preloader() {
             </p>
           </div>
 
-          {/* Acoustic Harmonic Frequency Visualizer */}
-          <div className="flex items-center justify-center gap-1.5 h-8 mt-6">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((idx) => (
-              <span
-                key={idx}
-                className="w-[2px] rounded-full bg-gradient-to-t from-gold/30 via-gold to-gold/80"
-                style={{
-                  animation: "sound-wave 1.3s ease-in-out infinite alternate",
-                  animationDelay: `${idx * 0.14}s`,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Poetic Ritual Phase State */}
-          <div className="mt-5 h-5 flex items-center justify-center">
-            <span
-              key={ritualPhase}
-              className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground animate-fade-in font-light transition-opacity duration-500"
-            >
+          {/* Progress Indicator */}
+          <div className="mt-5 flex flex-col items-center gap-1.5">
+            <span className="font-display text-sm tracking-[0.2em] text-gold/90 tabular-nums">
+              {Math.round(progress)}%
+            </span>
+            <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground font-light">
               {ritualPhase}
             </span>
           </div>
         </div>
       </div>
 
-      {/* HEALING SOUND - Plays once at the start, does not replay */}
+      {/* HEALING SOUND */}
       <audio ref={audioRef} id="healingSound" preload="auto">
         <source
           src="/freesound_community-e-flat-tibetan-singing-bowl-struck-38746.mp3"
