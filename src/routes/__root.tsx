@@ -123,7 +123,7 @@ function RootComponent() {
       <div
         className={`min-h-screen transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           loaded
-            ? "opacity-100 scale-100 blur-0"
+            ? "opacity-100"
             : "opacity-0 scale-[0.98] blur-[2px] pointer-events-none select-none invisible"
         }`}
       >

@@ -169,7 +169,7 @@ function Manifesto() {
 
       <div className="relative h-auto w-full overflow-hidden">
         <img
-          src={home2}
+          src={ripples}
           alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
           className="block h-auto w-full transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"

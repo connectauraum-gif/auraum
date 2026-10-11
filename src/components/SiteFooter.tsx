@@ -67,7 +67,7 @@ export function SiteFooter() {
                   rel="noopener noreferrer"
                   className="link-underline hover:text-gold"
                 >
-                  WhatsApp: +91 99588 82810
+                  +91 99588 82810
                 </a>
               </li>
               <li className="text-muted-foreground">By appointment only</li>
