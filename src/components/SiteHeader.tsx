@@ -83,13 +83,6 @@ export function SiteHeader() {
               </Link>
             </nav>
 
-            <Link
-              to="/book"
-              className="btn-ritual px-3 py-1.5 text-[0.6rem] md:hidden"
-            >
-              Book
-            </Link>
-
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}

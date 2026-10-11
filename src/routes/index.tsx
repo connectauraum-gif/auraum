@@ -140,12 +140,12 @@ function Manifesto() {
   const { ref, visible } = useInView<HTMLDivElement>(0.2);
   return (
     <section ref={ref} className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr_1fr]">
-      <div className="relative h-auto w-full overflow-hidden">
+      <div className="relative aspect-square w-full overflow-hidden">
         <img
           src={ripples}
           alt="Golden water ripples"
           loading="lazy"
-          className="block h-auto w-full transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="h-full w-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
         />
       </div>
 
@@ -167,12 +167,12 @@ function Manifesto() {
         </Reveal>
       </div>
 
-      <div className="relative h-auto w-full overflow-hidden">
+      <div className="relative aspect-square w-full overflow-hidden">
         <img
-          src={ripples}
+          src={home2}
           alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
-          className="block h-auto w-full transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="h-full w-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
         />
       </div>
     </section>
