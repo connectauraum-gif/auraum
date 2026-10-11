@@ -281,6 +281,41 @@
   }
 }
 
+@keyframes sound-wave {
+  0% {
+    height: 4px;
+    opacity: 0.3;
+  }
+  50% {
+    height: 24px;
+    opacity: 1;
+  }
+  100% {
+    height: 6px;
+    opacity: 0.4;
+  }
+}
+
+@keyframes ring-expand {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 @utility animate-ripple {
   animation: ripple-out 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
@@ -289,6 +324,12 @@
 }
 @utility animate-spin-slow {
   animation: spin-slow 40s linear infinite;
+}
+@utility animate-spin-reverse {
+  animation: spin-reverse 35s linear infinite;
+}
+@utility animate-ring-expand {
+  animation: ring-expand 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
 }
 @utility animate-breathe {
   animation: breathe 6s ease-in-out infinite;
