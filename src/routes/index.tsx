@@ -82,10 +82,8 @@ function Hero() {
       <img
         src={hero}
         alt="Stone terrace with a brass singing bowl overlooking the sea at sunset"
-        width={1920}
-        height={1200}
         style={{ transform: `translate3d(0, ${offset}px, 0)` }}
-        className="absolute inset-0 h-full w-full object-contain will-change-transform"
+        className="absolute inset-0 h-full w-full object-fill will-change-transform"
       />
       <div className="absolute inset-0 bg-ink/45" />
       <div className="veil absolute inset-0" />
@@ -141,19 +139,17 @@ function Hero() {
 function Manifesto() {
   const { ref, visible } = useInView<HTMLDivElement>(0.2);
   return (
-    <section ref={ref} className="grid grid-cols-1 items-center md:grid-cols-[1fr_1.1fr_1fr]">
-      <div className="relative flex w-full items-center justify-center">
+    <section ref={ref} className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr_1fr]">
+      <div className="relative h-56 w-full overflow-hidden md:h-[34rem]">
         <img
           src={ripples}
           alt="Golden water ripples"
           loading="lazy"
-          width={1024}
-          height={1024}
-          className="h-auto w-full object-contain transition-opacity duration-1000"
+          className="h-full w-full object-fill transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
         />
       </div>
 
-      <div className="grain flex flex-col items-center justify-center gap-6 bg-sand px-8 py-16 text-center text-sand-foreground md:py-16">
+      <div className="grain flex flex-col items-center justify-center gap-6 bg-sand px-8 py-16 text-center text-sand-foreground md:py-0">
         <Reveal>
           <p className="font-display text-3xl tracking-brand sm:text-4xl">AURAUM</p>
           <p className="mt-2 text-[0.55rem] uppercase tracking-brand opacity-70">
@@ -171,14 +167,12 @@ function Manifesto() {
         </Reveal>
       </div>
 
-      <div className="relative flex w-full items-center justify-center">
+      <div className="relative h-56 w-full overflow-hidden md:h-[34rem]">
         <img
           src={home2}
           alt="Crystal singing bowls glowing in candlelight"
           loading="lazy"
-          width={1280}
-          height={960}
-          className="h-auto w-full object-contain transition-opacity duration-1000"
+          className="h-full w-full object-fill transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
         />
       </div>
     </section>
@@ -187,23 +181,19 @@ function Manifesto() {
 
 function ShadowBand() {
   return (
-    <section className="relative flex min-h-[16rem] w-full items-center justify-center overflow-hidden md:min-h-[24rem]">
+    <section className="relative h-64 overflow-hidden md:h-[26rem]">
       <img
         src={shadows}
         alt="Olive branch shadows on warm plaster"
         loading="lazy"
-        width={1920}
-        height={768}
-        className="absolute inset-0 h-full w-full object-contain"
+        className="animate-drift absolute inset-0 h-full w-full object-fill"
       />
       <img
         src={chakra}
         alt=""
         aria-hidden="true"
         loading="lazy"
-        width={1024}
-        height={1024}
-        className="animate-spin-slow pointer-events-none absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain opacity-25 mix-blend-screen"
+        className="animate-spin-slow pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 object-fill opacity-25 mix-blend-screen md:h-[40rem] md:w-[40rem]"
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <Reveal>
@@ -227,14 +217,12 @@ function QuoteBand() {
           <p className="mt-5 text-[0.55rem] uppercase tracking-brand opacity-70">— Isa, Auraum</p>
         </Reveal>
 
-        <Reveal delay={150} className="relative z-0 flex w-full items-center justify-center">
+        <Reveal delay={150} className="relative z-0 h-72 w-full overflow-hidden md:h-[26rem]">
           <img
             src={meditation}
             alt="Isa Barao, founder and spatial sound practitioner"
             loading="lazy"
-            width={1024}
-            height={1280}
-            className="h-auto w-full object-contain transition-transform duration-[1400ms]"
+            className="h-full w-full object-fill transition-transform duration-[1400ms]"
           />
         </Reveal>
 
@@ -294,14 +282,12 @@ function CertificationBand() {
               <div className="absolute -bottom-4 -right-4 h-10 w-10 border-b border-r border-gold" />
 
               {/* Image */}
-              <div className="relative overflow-hidden bg-black/20">
+              <div className="relative h-[min(80vw,520px)] w-[min(80vw,520px)] overflow-hidden bg-black/20">
                 <img
                   src={cert1}
                   alt="Isa Certification"
                   loading="lazy"
-                  width={1024}
-                  height={1024}
-                  className="h-auto w-[min(80vw,520px)] object-contain transition-transform duration-[1400ms] ease-out"
+                  className="h-full w-full object-fill transition-transform duration-[1400ms] ease-out"
                 />
 
                 {/* Subtle overlay */}
@@ -324,14 +310,12 @@ function CertificationBand() {
 
 function Closing() {
   return (
-    <section className="grain relative flex min-h-[50vh] w-full items-center justify-center overflow-hidden md:min-h-[65vh]">
+    <section className="grain relative flex h-[70vh] items-center justify-center overflow-hidden">
       <img
         src={vortex}
         alt="Golden water spiral at sunset"
         loading="lazy"
-        width={1920}
-        height={912}
-        className="absolute inset-0 h-full w-full object-contain"
+        className="animate-drift absolute inset-0 h-full w-full object-fill"
       />
       <div className="absolute inset-0 bg-ink/35" />
       <Reveal className="relative text-center">
