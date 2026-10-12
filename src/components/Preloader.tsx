@@ -1,18 +1,67 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PreloaderProps {
   onComplete?: () => void;
+}
+
+// Module-level audio reference so sound persists and resonates even after Preloader finishes
+let persistentAudio: HTMLAudioElement | null = null;
+let soundPlayedOnce = false;
+
+function playPreloaderAudio() {
+  if (typeof window === "undefined" || soundPlayedOnce) return;
+
+  if (!persistentAudio) {
+    persistentAudio = new Audio("/healing-sound.mp3");
+    persistentAudio.preload = "auto";
+  }
+  persistentAudio.volume = 0.4;
+
+  const promise = persistentAudio.play();
+  if (promise !== undefined) {
+    promise
+      .then(() => {
+        soundPlayedOnce = true;
+        cleanupListeners();
+      })
+      .catch(() => {
+        // Autoplay policy prevented immediate playback; waiting for first interaction
+      });
+  }
+}
+
+function handleFirstInteraction() {
+  if (!soundPlayedOnce) {
+    playPreloaderAudio();
+  }
+}
+
+function setupListeners() {
+  if (typeof window === "undefined" || soundPlayedOnce) return;
+  const events = ["pointerdown", "mousedown", "touchstart", "click", "keydown"] as const;
+  events.forEach((evt) => {
+    window.addEventListener(evt, handleFirstInteraction, { capture: true, passive: true });
+  });
+}
+
+function cleanupListeners() {
+  if (typeof window === "undefined") return;
+  const events = ["pointerdown", "mousedown", "touchstart", "click", "keydown"] as const;
+  events.forEach((evt) => {
+    window.removeEventListener(evt, handleFirstInteraction, true);
+  });
 }
 
 export function Preloader({ onComplete }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [done, setDone] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioPlayed = useRef(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    setupListeners();
+    playPreloaderAudio();
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -23,35 +72,6 @@ export function Preloader({ onComplete }: PreloaderProps) {
       document.body.style.overflow = "";
     }
   }, [transitioning]);
-
-  useEffect(() => {
-    const playAudio = async () => {
-      if (audioRef.current && !audioPlayed.current) {
-        try {
-          audioRef.current.volume = 0.35;
-          await audioRef.current.play();
-          audioPlayed.current = true;
-          document.removeEventListener("click", playAudio);
-          document.removeEventListener("touchstart", playAudio);
-          document.removeEventListener("scroll", playAudio);
-        } catch {
-          // Autoplay blocked until interaction
-        }
-      }
-    };
-
-    document.addEventListener("click", playAudio);
-    document.addEventListener("touchstart", playAudio);
-    document.addEventListener("scroll", playAudio, { passive: true });
-
-    playAudio();
-
-    return () => {
-      document.removeEventListener("click", playAudio);
-      document.removeEventListener("touchstart", playAudio);
-      document.removeEventListener("scroll", playAudio);
-    };
-  }, []);
 
   useEffect(() => {
     const DURATION = 3000; // Exactly 3 seconds
@@ -98,6 +118,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
       <div
         id="intro"
         aria-hidden={transitioning}
+        onPointerDown={handleFirstInteraction}
+        onClick={handleFirstInteraction}
         className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           transitioning
             ? "pointer-events-none invisible opacity-0 scale-[1.04] blur-[4px]"
@@ -183,17 +205,6 @@ export function Preloader({ onComplete }: PreloaderProps) {
           </div>
         </div>
       </div>
-
-      {/* HEALING SOUND */}
-      <audio ref={audioRef} id="healingSound" preload="auto">
-        <source
-          src="/freesound_community-e-flat-tibetan-singing-bowl-struck-38746.mp3"
-          type="audio/mpeg"
-        />
-        <source src="/healing-sound.mp3" type="audio/mpeg" />
-        <source src="/healing-sound.wav" type="audio/wav" />
-        Your browser does not support audio.
-      </audio>
     </>
   );
 }
