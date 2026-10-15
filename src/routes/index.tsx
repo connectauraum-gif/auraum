@@ -4,7 +4,7 @@ import hero from "@/assets/hero.jpg";
 import ripples from "@/assets/ripples.jpg";
 import soundbath from "@/assets/soundbath.jpg";
 import meditation from "@/assets/isa main page.jpeg";
-import cert1 from "@/assets/isa certification 1.jpeg";
+import cert1 from "@/assets/cert aur.jpeg";
 import chakra from "@/assets/chakra.jpg";
 import shadows from "@/assets/shadows.jpg";
 import vortex from "@/assets/vortex.jpg";
