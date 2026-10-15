@@ -230,7 +230,7 @@ function QuoteBand() {
           <p className="text-[0.55rem] uppercase tracking-brand opacity-70">Meet Isa</p>
           <p className="mt-4 max-w-xs text-xs leading-loose opacity-80">
             Founder and spatial sound practitioner. Isa works at the intersection of sound, space
-            and architecture, creating environments that feel different — because they are.
+            and architecture, creating environments that feel different, because they are.
           </p>
           <Link
             to="/about"
